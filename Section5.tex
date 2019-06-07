@@ -1,0 +1,146 @@
+
+\section{K-homology}
+K-theory is a (generalized) cohomology theory, hence there is a dual (generalized) homology theory developed by Whitehead and others in the 60s and 70s. One possible way to define K-homology is as follows:
+
+\noindent Given a topological space $X$ we construct a "dual space" $DX$ and define the K-homology of $X$ as the K-theory of its dual space:
+$$K_0(X)=K^0(DX).$$
+Atiyah (1969) realized that K-homology can be represented by elliptic operators. $F\in\Ell(X)$ induces an "index pairing" 
+$$\Ind_F\colon K^0(X)\to K^0(\bullet)\simeq\Z.$$ 
+Hence any $\alpha\in K_0(X)$ also gives a map $K^0\to\Z$ and we have a homomorphism $$K_0(X)\to\Hom(K^0(X),\Z),$$ which is generally not an isomorphism. But, for each space $Y$, $F$ also induces a map $$Y-\Ind_F\colon K^0(X\times Y)\to K^0(Y).$$
+In general there is a pairing called "slant product" $$K_0(X)\times K^0(X\times Y)\to K^0(Y).$$
+In the specific case of $Y=DX$ there is a $\mu\in K^0(X\times DX)$ such that $$-\otimes\mu\colon K_0(X)\to K^0(DX)$$ is an 
+isomorphism. Then we obtain $$DX-\Ind_F(\mu)\in K^0(DX)\simeq K_0(X)$$ and we call this element $[F]$. Thus we have a map 
+$\Ell(X)\to K_0(X)$ and Atiyah proved that this map is surjective (it is not injective). Kasparov (1975) provided the appropriate notion of equivalence on $\Ell(X)$ and proved $\Ell(X)/\sim\simeq K_0(X)$. Later (1980) he introduced "bivariant K-theory groups" $KK(X,Y)$ such that \begin{align*} KK(X,\bullet)&\simeq K_0(X)\\KK(\bullet,Y)&\simeq K^0(Y). \end{align*}
+After this brief historical overview we start formalizing the notions we talked about so far.
+
+\subsection{Fredholm Modules}
+\begin{definition}
+ A \emph{Fredholm Module} over a unital $C^\ast$-algebra $A$ is a pair $(H,F)$ where $H$ is an Hilbert space equipped with a representation $\pi:A\to\B(H)$ and $F\in\B(H)$ is a self-adjoint bounded operator such that $1-F^2$ is compact and $[F,a]$ is compact for every $a\in A$, where $[F,a]=Fa-aF$ and we're identifying $A$ and $\pi(A)$. 
+\end{definition}
+
+\begin{remark}\noindent
+ \begin{enumerate}
+  \item If $F$ is a zeroth order pseudodifferential operator on a smooth compact manifold $M$, then $[F,a]$ is compact for $a\in\Co(M)$. \red{what is a zeroth order pseudodifferential operator?}
+  \item Since $1-F^2$ is compact, $F$ is Fredholm, with parametrix $F$ itself. However $\ind(F)=0$, since $F=F^\ast$, which is a "boring" case, we will have to look at a different case in which we get a nonzero index. 
+ \end{enumerate}
+\end{remark}
+
+\begin{definition}
+A Fredholm module $(H,F)$ over a $C^\ast$-algebra $A$ is called \emph{even} if there exist a $\gamma\in\B(H)$, called the \emph{grading operator}, such that $\gamma^\ast=\gamma$, $\gamma^2=1$, $F\gamma=-\gamma F$ and $\gamma a=a\gamma$ for all $a\in A$.  
+\end{definition}
+
+\noindent The idea behind this definition is that if $(F,H)$ is an even Fredholm module over the $C^\ast$-algebra $A$ then we have a decomposition $H=H^+\oplus H^-$ where $H^{\pm}$ are the $\pm 1$-eigenspaces of $\gamma$ and we can write 
+$$\gamma=\begin{pmatrix}1 & 0 \\ 0 & -1\end{pmatrix},\quad\quad F=\begin{pmatrix}0 & F^- \\ F^+ & 0\end{pmatrix}.$$
+Now we can define the even (or odd) K-homology of $A$ as the isomorphism classes of even (or odd) Fredholm modules over $A$, so to each $C^\ast$-algebra $A$ we associate an Abelian group $K^0(A)$, which is actually a contravariant functor. Given $\varphi\colon A\to B$ we obtain $K^0\varphi=\varphi^\ast\colon K^0(B)\to K^0(A)$ by $(H,\pi,F)\mapsto (H,\pi\circ\varphi,F)$.
+
+\subsection{Index Pairing}
+Consider an even Fredholm module $(H,F)$ over a $C^\ast$-algebra $A$ and an element $[p]\in K_0(A)$, where $p\in M_k(A)$ is a projection.
+\begin{definition}\label{defn: H_k}
+ We define $H_k=H\otimes\C^k$ and $H_k^\pm=H^\pm\otimes\C^k$. Note that $p$ acts on $H_k$ by extending $\pi$. We also define $F_k=F\otimes\Id_k$ and $F_k^\pm=F^\pm\otimes\Id_k$.
+\end{definition}
+
+\begin{definition}
+ With the notation introduced in Definition \eqref{defn: H_k} we define $$\langle [p],[F]\rangle=\ind(pF_k^+p\colon pH_k^+\to pH_k^-)$$. Furthermore we define $\Ind_F\colon K_0(A)\to\Z$ by $[p]\mapsto\langle[p],[F]\rangle$.
+\end{definition}
+\begin{proposition}
+ $\Ind_F$ is well defined.
+\end{proposition}
+\begin{proof}
+ First we check that $pF_k^+p$ is a Fredholm operator. We have 
+ \begin{align*}
+  (pF_kp)^2&=pF_kpf_kp\\&=p[F_k,p]F_kp\\&=p[F_k,p]F_kp+p(F^2-1)p+p\\&=p+\text{compact operators},
+ \end{align*}
+since $[F_k,p]$ and $(F^2-1)$ are compact. Since $p=\Id_{pH_k}$ this shows that $pF_kp$ is Fredholm and so is $pF_k^+p$. Moreover if $p\simh q$ then $pF_k^+p\simh qF_k^+ q$ and the index is homotopy invariant by Theorem \eqref{thm: index_is_homotopy_invariant}. Hence $\Ind_F([p])$ only depends on $[p]$, as we wanted to show.
+\end{proof}
+
+\subsection{Differential Operators}
+Let $(M,g)$ be a compact smooth Riemannian manifold of dimension $n$.
+
+\begin{definition}
+ A smooth vector bundle $E\to M$ is called \emph{Hermitian} if there exist an Hermitian structure (fiberwise inner product), that is a map $(-,-)\colon E\times E\to \Co^{\infty}(M)$ such that $$(-,-)_x\colon E_x\times E_x\to \Co^\infty(M)$$ is a inner product for all $x\in M$.
+\end{definition}
+
+\begin{definition}
+ If $E\to M$ is an Hermitian bundle we denote with $\G^\infty(E)$ the space of smooth sections of $E$. We obtain an inner product on $\G^\infty(E)$ by setting, for $\varphi,\psi\in\G^\infty(E)$:$$\langle\varphi,\psi,\rangle=\int_M(\varphi(x),\psi(x))\mathrm{dvol}_g(x),$$ where $\mathrm{dvol}_g(x)=\sqrt{\det(g)}\mathrm{d}x^1\wedge\cdots\wedge\mathrm{d}x^n$ is the volume form of $M$. The completion of $\G^\infty(E)$ with respect to $\langle -,-\rangle$ is denoted by $L^2(E)$.
+\end{definition}
+
+\begin{definition}
+ A \emph{1st order differential operator} $D$ on $E$ is a linear map $L^\infty(E)\to L^\infty(E)$ which in local coordinates has the form $$D=\sum_{j=1}^na_j\partial_{x_j}+b,\text{ where }a_j,b\in\G^\infty(\End(E)),$$
+ where $\End(E)$ denotes the vector bundle with fibers $(\End(E))_x=\End (E_x)$.
+\end{definition}
+
+\begin{definition}
+ The \emph{formal adjoint} $D^t$ of a 1st order differential operator $D$ is the unique 1st order differential operator on $E$ such that $$\langle D\varphi,\psi\rangle=\langle\varphi,D^t\psi\rangle, \text{ for all }\varphi,\psi\in L^2(E).$$
+ 
+ \noindent $D$ is called \emph{formally self-adjoint} if $D=D^t$.
+\end{definition}
+
+\begin{remark}
+ Since $L^2(E)$ is the completion of $L^\infty(E)$ we can think about a 1st order differential operator $D$ as a densely defined operator on $L^2(E)$ to obtain:
+ \begin{enumerate}
+  \item Since $D^t\subseteq D^\ast$,$D^\ast$ is densely defined and $D$ is closable.
+  \item If $D$ is formally self-adjoint then $D$ is symmetric on $\dom (D)=L^\infty(E)$.
+ \end{enumerate}
+\end{remark}
+In fact, since $M$ is compact and $D$ is first order we can say more:
+\begin{proposition}
+ If $D$ is as above and symmetric, then $D$ is essentially self-adjoint.
+\end{proposition}
+\begin{proof}[Proof (sketch):] The proof is based on the fact that if $\psi\in\dom (D)^\ast$ and $\supp(\psi)$ is compact, then $\psi\in\dom(\overline{D^t})$.
+\end{proof}
+
+\begin{definition}
+ The \emph{principal symbol} of a 1st order differential operator $D$ is the map $\sigma_D\colon T^\ast M\to\End(E)$ given by $$\sigma_D(x,\xi)=[D,f](x),$$ where $x\in M$,$\xi\in T^\ast M$ and $f\in\Co^\infty(M)$ is such that $\mathrm{d}f=\xi$. \red{why is there such a $f$?} In local coordinates we have $$\xi=\sum\xi_j\mathrm{d}x^j\text{ and }\sigma_D(x,\xi)=\sum a_j\xi_j.$$ 
+\end{definition}
+
+\begin{definition}
+ A 1st order differential operator $D$ is called \emph{elliptic} if for all $x\in M$ and all nonzero $\xi\in T^xM$, $\sigma_D(x,\xi)\colon E_x\to E_x$ is invertible.
+\end{definition}
+
+\noindent Let $W^{1,2}$ denote the first Sobolev space with inner product $\langle -,-\rangle$. \red{What is it?}. We have the following two facts that we assume without proof.
+\begin{theorem}[Rellich's Lemma]The inclusion $W^{1,2}(E)\hookrightarrow L^2(E)$ is compact.\end{theorem}
+\begin{lemma}[Gårding's inequality] There exist a constant $c>0$ such that $\langle \psi,\psi\rangle\leq c\langle\psi,\psi\rangle_D$ for $D$ elliptic.\end{lemma}
+
+\noindent As a consequence we have $\dom(\overline{D})=W^{1,2}(E)$, with equivalent norms.
+\begin{theorem}
+ Let $D$ be a formally self-adjoint, elliptic 1st order differential operator. Then
+ \begin{enumerate}
+  \item $D$ is essentially self-adjoint.
+  \item $\Co^\infty(M)\cdot\dom(D)\subseteq\dom(D)$ and $[D,f]$ is bounded for $f\in\Co^\infty(M)$.
+  \item $(\overline{D}\pm i)^{-1}$ is compact.
+ \end{enumerate}
+\end{theorem}
+\begin{proof}
+ We have already seen $(1)$, and clearly $[D,f]=\sigma_D(\mathrm{d}f)$ is bounded.\\ To prove $(3)$ we look at $(\overline{D}\pm i)^{-1}\colon L^2(E)\to L^2(E)$ as the composition
+ $$\begin{tikzcd}L^2(E)\arrow["(\overline{D}\pm i)^{-1}",r] & \dom(\overline{D}) \arrow["\Id",r] & W^{1,2}(E)\arrow["i",hook,r] & L^2(E)\end{tikzcd},$$ the first map is bounded since $D$ is self-adjoint \red{I don't see how that follows}, the second is bounded by Gårding's inequality, while the third is compact by Rellich's lemma hence the whole composition is compact.
+\end{proof}
+
+\begin{remark}
+ We recall the spectral theorem for compact operators. Let $T$ be a compact normal operator on an Hilbert space $H$ (where normal means that $TT^\ast=T^\ast T$). Then $$H=H_0\oplus\bigoplus{n\in\N}H_{\mu_n},$$
+ where $H_0=\ker T$ and $H_{\mu_n}$ ($\mu_n\neq 0$) is the finite dimensional eigenspace of $T$ with eigenvalue $\mu_n$. Moreover $|\mu_n|\to 0$ as $n\to\infty$ 
+\end{remark}
+\begin{corollary}
+ With $D$ as before \red{maybe write it explicitely who's $D$} we have $L^2(E)=\overline{\bigoplus H_{\lambda_n}}$, where $H_{\lambda_n}$ is the finite dimensional eigenspace of $D$ with eigenvalue $\lambda_n$. Moreover $|\lambda_n|\to\infty$ as $n\to\infty$.
+\end{corollary}
+\begin{theorem}[Elliptic Regularity] If $\psi\in\dom(\overline{D})$ where $D$ is an elliptic operator and $\overline{D}\psi\in\G^\infty(E)$, then $\psi\in\G^\infty(E)=\dom(D)$. In particular $H_{\lambda_n}\subseteq\G^\infty(E)$ for each $\lambda_n$.
+\end{theorem}
+\subsection{Spectral Triples}
+\begin{definition}
+ A \emph{spectral triple} over a unital $C^\ast$-algebra $A$ is a triple $(\mathcal A,H,D)$ where $H$ is a Hilbert space equipped with a represention $\pi\colon A\to\B(H)$, a dense subalgebra $\mathcal A\subseteq A$ and a densely defined $D\colon\dom(D)\to H$ such that: 
+ \begin{enumerate}
+  \item $D$ is self-adjoint.
+  \item $\mathcal A\cdot\dom(D)\subseteq\dom(D)$ and $[D,a]$ is bounded for $a\in\mathcal A$.
+  \item $(D\pm i)^{-1}$ are compact operators.
+ \end{enumerate}
+
+\end{definition}
+
+
+
+
+
+
+
+
+
+
