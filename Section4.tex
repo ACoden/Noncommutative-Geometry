@@ -1,0 +1,85 @@
+
+\section{Operators}
+\subsection{Unbounded Operators}
+\begin{definition}
+ A \emph{densely defined operator} $D$ on a separable Hilbert space $H$ is a linear map $D\to H$, where $\dom D$ is dense in $H$.
+\end{definition}
+
+\begin{definition}
+ The \emph{graph} of a densely defined operator $D$ is $$g(D)=\{(\psi,D\psi)\in H\oplus H\mid\psi\in\dom D\}$$
+\end{definition}
+
+\begin{definition}
+ The \emph{adjoint} of $D$ is the operator $D^\ast$ with $$\dom D^\ast=\{\xi\in H\mid \exists\eta\in H\text{ such that }\forall\psi\in\dom D, \langle\xi, D\psi\rangle=\langle\eta,\psi\rangle,$$
+ then $D^\ast\xi=\eta$.
+\end{definition}
+
+\begin{definition}
+ A densely defined operator $D$ is called
+ \begin{itemize}
+  \item \emph{Closed} iff $g(D)$ is closed in $H\oplus H$. That is, if $\psi_n\in\dom D$ and $(\psi_n,D\psi_n)\to(\psi,\eta)$ in $H\oplus H$, then $\psi\in\dom D$ and $\eta=D\psi$.
+  \item \emph{Closable} iff there exist a (necessarily unique) operator $\overline{D}$, called the \emph{closure of $D$}, such that $\overline{g(D)}=g(\overline{D})$.
+  \item \emph{Symmetric} iff $\langle\varphi, D\psi\rangle=\langle D\varphi,\psi\rangle$ for all $\varphi,\psi\in\dom D$ (intuitively $D\subseteq D^\ast$).
+  \item \emph{Self-Adjoint} iff $D$ is symmetric and $\dom D=\dom D^\ast$ (intuitively $D=D^\ast$).
+  \item \emph{Essentially self-adjoint} iff $D$ is symmetric and $\dom D^\ast=\dom\overline{D}$ (intuitively $D^\ast=\overline{D}$).
+ \end{itemize}
+\end{definition}
+\begin{fact}\noindent 
+ \begin{enumerate}
+  \item $D$ is closable iff $D^\ast$ is densely defined. Then $D^\ast$ is closed and $(D^\ast)^\ast=D$.
+  \item Any symmetric operator is closable.
+ \end{enumerate}
+\end{fact}
+\begin{theorem}
+ A densely defined operator $D$ is self-adjoint iff $D\pm i\colon\dom D\to H$ are bijective.
+\end{theorem}
+
+\noindent We can equip $\dom D$ with the graph inner product $\langle\varphi,\psi\rangle_D=\langle\varphi,\psi\rangle+\langle D\varphi,D\psi\rangle$. Then $D$ is closed iff $\dom D$ is complete wrt to $\langle\cdot,\cdot\rangle_D$. Moreover $D\colon\dom D\to H$ is bounded wrt $\langle\cdot,\cdot\rangle_D$. \red{I'm not sure what the point of this paragraph is, should it be a remark or...?}
+
+\subsection{Continuous Functional Calculus}
+If $D$ is self-adjoint $1+D^2$ is surjective, but it is also injective, so $(1+D^2)^{-1}$ is a well defined and positive operator in $\B(H)$. Then we get $(1+D^2)^{-1/2}\in\B(H)$ such that $\ran(1+D^2)^{-1/2}=\dom D$ and hence we also get $F_D=D(1+D^2)^{-1/2}\in\B(H)$, a so called \emph{bounded transform} of $D$. We also get a commutative $C^\ast$-algebra $$C^\ast(1,F_D)\simeq\Co(\sp(F_D)),$$ with $\sp(F_D)\subseteq [-1,1]$. Consider now an $f\in\Co_b(\Bbb R)$ such that $\lim_{x\to\pm\infty}f(x)$ exists and let $g(x)=f(x(1-x^2)^{-1/2})$, so in particular $g\in\Co([-1,1])$ and we can define $f(D)=g(F_D)\in C^\ast(1,F_D)\subseteq\B(H)$. This can be extended to an arbitrary $f\in\Co(\R)$. \red{it's not very clear to me how $f(D)$ is defined.}
+
+\subsection{Fredholm Operators}
+\begin{definition}
+ An operator $T\in\B(H)$ is called \emph{Fredholm} if $\ker T$ and $\coker T=H/\ran T$ are both finite dimensional. We denote the set of all Fredholm operators on $H$ by $\F(H)$.
+\end{definition}
+
+\begin{definition}
+ For $T\in\F(H)$ we define the \emph{index} of $T$ as $\ind T=\dim\ker T-\dim\coker T$.
+\end{definition}
+\begin{fact}
+ The following facts are true: 
+ \begin{enumerate}
+  \item For $T\in\B(H)$, $\ker T^\ast=(\ran T)^\perp$.
+  \item If $T\in\F(H)$, $\ran T$ is closed and therefore $\ran T=(\ran T)^{\perp\perp}$.
+  \item $T$ is Fredholm iff $\ran T$ is closed and $\ker T$, $\ker T^\ast$ are finite dimensional.
+  \item If $T\in\F(H)$, then $T^\ast\in\F(H)$ and $\ind T^\ast=-\ind T$.
+  \item For $T,S\in\F(H)$, $\ind (T\oplus S)=\ind T+\ind S$ and $\ind(TS)=\ind T+\ind S$.
+  \item For $K\in \K(H)$, $1+K\in\F(H)$ and $\ind(1+K)=0$.
+ \end{enumerate}
+\end{fact}
+
+\noindent Note that this all makes sense for operators $H_1\to H_2$, so in particular it makes sense for closed operators $D\colon\dom D\to H$.
+
+\begin{definition}
+ The \emph{Calkin} algebra is $\Co(H)=\B(H)/\K(H)$, with quotient map $\pi\colon\B(H)\to\Co(H)$.
+\end{definition}
+
+\begin{theorem}[Atkinson]
+ A bounded operator $T\in\B(H)$ is Fredholm iff $\pi(T)\in\Co(H)$ is invertible. In other words $T$ is Fredholm iff there exist a "parametrix" $S\in\B(H)$ such that $\Id-ST,\Id-TS\in\K(H)$. \red{is it clear that those two formulations of Atkinson's theorem are equivalent?}
+\end{theorem}
+
+\begin{corollary}\noindent
+ \begin{enumerate}
+  \item $\F(H)$ is open in $\B(H)$: given $T\in\F(H)$ there is $\varepsilon>0$ such that for all $S\in\B(H)$ with $\|S\|<\varepsilon$, $T+S\in\F(H)$.
+  \item if $T\in\F(H)$ and $K\in\K(H)$, then $T+K\in\F(H)$ and $\ind(T+K)=\ind(T)$.
+ \end{enumerate}
+\end{corollary}
+
+\begin{theorem}
+ The map $\ind\colon\F(H)\to\Z$ is locally constant. In particular if $[0,1]\to\F(H)$, $t\mapsto T_t$ is continuous, then $\ind T_0=\ind T_1$. Moreover it induces an isomorphism $[\F(H)]\to\Z$, where $[\F(H)]$ is the set of path components of $\F(H)$.
+\end{theorem}
+
+\begin{theorem}[Atiyah-Janich] 
+ For $X$ compact Hausdorff we have an isomorphism $[X,\F(H)]\to K_0(X)$ given by "family index", where $[X,\F(H)]$ are homotopy classes of continuous maps $X\to\F(H)$
+\end{theorem}

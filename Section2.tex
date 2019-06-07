@@ -1,0 +1,172 @@
+\section{Serre-Swan Duality}
+\subsection{Vector Bundles}
+In this section $X$ will denote a compact Hausdorff space
+\begin{definition}
+ A \emph{(complex) vector bundle} over $X$ is a topological space $E$ with a surjective continuous map $p\colon E\to X$ such that
+ \begin{enumerate}
+  \item $E_x=p^{-1}(x)$ is a vector space for all $x\in X$.
+  \item $E$ is locally trivial, that is for all $x\in X$ there is an open set $\U$ containing $x$, $k\in\N$ and a homeomorphism $\phi\colon p^{-1}(\U)\to\U\times\C^k$ such that $\phi_x:E_x\to\C^k$ is linear and $p=\mathrm{pr}\circ\phi$ on $p^{-1}(\U)$, where $\mathrm{pr}:\U\times\C^k\to\U$ is the projection on the first factor.
+ \end{enumerate}
+\end{definition}
+
+\begin{definition}
+ A \emph{morphism of vector bundles} from $p\colon E\to X$ to $p'\colon E'\to X$ is a continuous map $\tau\colon E\to E'$ such that $p'\circ\tau=p$ and $\tau_x:E_x\to E_x'$ is linear for all $x\in X$.
+\end{definition}
+
+\begin{definition}\label{def: Gamma}
+ The \emph{space of sections of $E$} is $\G(E)=\{\text{continuous maps $s\colon X\to E$ such that $p\circ s=\mathrm{Id}_X$}\}$.
+ $\G(E)$ has the structure of a right $\Co(X)$-module with $$(sf)(x)=s(x)f(x),\quad\text{ for all }f\in\Co(X),s\in\G(E).$$
+\end{definition}
+
+\begin{lemma}\label{lemma: split}
+ Any short exact sequence of vector bundles splits. In other words if $$\begin{tikzcd}0\arrow[r] & E'\arrow["\alpha",r] & E \arrow["\beta",r] & E''\arrow[r] & 0 \end{tikzcd}$$ is a short exact sequence then there exist a morphism $\sigma\colon E''\to E$ such that $\beta\circ\sigma=\mathrm{Id}_{E''}$. 
+\end{lemma}
+
+\begin{proof}[Proof (sketch):]\noindent
+ \begin{enumerate}
+  \item Any short exact sequence of vector spaces splits, this is a well known linear algebra fact.
+  \item Using local triviality and continuity for each $x\in X$ there is an open neighbourhood $\U_x\subseteq X$ trivializing $E$ such that $$\begin{tikzcd}0\arrow[r] & E'_{|_{\U_x}}\arrow["\alpha",r] & E_{|_{\U_x}} \arrow["\beta",r] & E''_{|_{\U_x}}\arrow[r] & 0 \end{tikzcd}$$ is a short exact sequence.
+  \item Pick a finite subcover and use a partition of unity argument to obtain a global splitting.
+ \end{enumerate}
+\end{proof}
+ \begin{remark}
+  Given $\beta\colon E\to E''$, $\ker(\beta)$ is a vector bundle iff $x\mapsto\rank(\beta_x)$ is locally constant. For example this holds whenever $\beta$ is injective or surjective. In general $\rank(\beta_x)$ is lower-semicontinuous, i.e. $$\forall x\in X\exists\,\U\text{ open nbhd of }x\text{ such that }\forall y\in\U\,(\rank(\beta_i)\geq\rank(\beta_x)).$$
+ \end{remark}
+ 
+\begin{proposition}\label{prop: direct sum}
+ Given a vector bundle $E\to X$, there exist a vector bundle $F\to X$ such that $E\oplus F\simeq \C^n\times X$.
+\end{proposition}
+\begin{proof}[Proof (sketch):]
+ Pick a finite subcover of trivializing nbhds $\{\U_j\}_{j=1}^n$ with a partition of unity $\{\chi_j\}_{j=1}^n$. For each $j$ we have $E_{|_{\U_j}}\simeq\U_j\times\C^k$ and there exist sections $s_{jl}\colon \U_j\to E$, $l=1,\ldots,k$ such that $s_{jl}(x)\in E_x$ is a basis for every $x$. Now define $\varphi_{jl}\colon X\to E$ as $$\varphi_{jl}=\begin{cases}
+\chi_js_{jl} & \text{on } \U_j \\
+0 &\text{otherwise}                                                                                                                                                                                                                                        \end{cases}$$
+
+\noindent Let $m=nk$ and define $\beta\colon X\times\C^m\to E$ by $$\beta(x,v)=\sum_{j,l}v_{jl}\varphi_{jl}(x).$$
+Then $\beta$ is surjective and we get an exact sequence 
+$$\begin{tikzcd}0\arrow[r] & \ker\beta\arrow[r] & X\times\C^m \arrow[r] & E\arrow[r] & 0 \end{tikzcd}$$
+which splits by Lemma \eqref{lemma: split}, hence $E\oplus\ker\beta\simeq\C^m\times X$.
+\end{proof}
+
+\subsection{The functor $\G$}
+
+For each vector bundle $E\to X$ we obtain a $\Co(X)$-module $\G(E)$ as described in Definition \eqref{def: Gamma}. Moreover given a morphism $\tau\colon E\to E'$ of vector bundles over $X$ we obtain a $\Co(X)$-linear map $G(\tau)\colon\G(E)\to\G(E')$ given by $\G(\tau)(s)=\tau\circ s$.
+
+\noindent Since $\G(\Id_E)=\Id_{E'}$ and $G(\tau\circ\sigma)=\G(\tau)\circ\G(\sigma)$ we have the following
+\begin{lemma}
+ $\G$ is a functor between the category of vector bundles over $X$ with morphisms of vector bundles to the category of $\Co(X)$-modules with $\Co(X)$-linear maps.
+\end{lemma}
+
+\begin{proposition}\noindent 
+ \begin{enumerate}
+  \item $\G(E)\oplus\G(E')\simeq\G(E\oplus E')$.
+  \item $\G(E^\ast)\simeq\G(E)^\ast$, where $E^\ast\to X$ is the dual vector bundle and $\G(E)^\ast=\mathrm{Hom}_{\Co(X)}(\G(E),\Co(X))$ is the dual $\Co(X)$-module.
+  \item $\G(E)\otimes_{\Co(X)}\G(E')\simeq\G(E\otimes E')$, where $E\otimes E'\to X$ has fibers $E_x\otimes E_x'$.
+ \end{enumerate}
+\end{proposition}
+
+\begin{proof}[Proof (sketch of 3):]
+ For $s\in\G(E),s'\in\G(E')$ define $s\odot s'\in\G(E\otimes E')$ by $$(s\odot s')(x)=s(x)\otimes s'(x).$$ We need to show that $s\otimes s'\mapsto s\odot s'$ is an isomorphism, call this map $\Theta\colon \G(E)\otimes_{\Co(C)}\G(E')\to\G(E\otimes E')$.
+ 
+ \begin{itemize}
+  \item If $E$ and $E'$ are trivial over $\U\subseteq X$ take local bases $s_j$ and $s_j'$ (meaning local sections which are pointwise basis of the fibers) and check that $s_j\odot s_j'$ is a local basis for $E\otimes E'$. In particular if $E$ and $E'$ are globally trivial, that is $\U=x$, this is an isomorphism.
+  \item In general take $F$ and $F'$ such that $E\oplus F\simeq X\times\C^k$ and $E'\oplus F'\simeq X\times C^{k'}$ (those exist by Proposition \eqref{prop: direct sum}). We obtain the following commutative diagram:
+  $$\begin{tikzcd}
+    \G(E)\otimes_{\Co(X)}\G(E') \arrow["\Theta",r] \arrow["\G(i\otimes i')"',d] & \G(E\oplus E') \arrow["\G(i'')",d] \\
+    \G(E\oplus F)\otimes_{\Co(X)}\G(E'\oplus F') \arrow["\widetilde{\Theta}",r] \arrow["\G(\sigma)\otimes\G(\sigma')"',d] & \G((E\oplus F)\otimes(E'\oplus F'))\arrow["\G(\sigma'')",d] \\
+    \G(E)\otimes_{\Co(X)}\G(E') \arrow["\Theta",r]  & \G(E\oplus E')
+    \end{tikzcd}
+ $$
+ and we get that $\Theta$ is surjective by the top half and injective by the lower half.
+ \end{itemize}
+\end{proof}
+
+\begin{corollary}
+ Each $\Co(X)$-linear map $\G(E)\to\G(E')$ is obtained by applying $\G$ to some $\tau\colon E\to E'$ (in other words $\G$ is a full functor).
+\end{corollary}
+\begin{proof}
+ A morphism $\tau$ is a section of $\mathrm{Hom}(E,E')=E^\ast\otimes E'\to X$ (which is the vector bundle with fibers $E_x^\ast\otimes E_x'$), in other words $\tau\in\G(E^\ast\otimes E)$. But now we get that a $\Co(X)$-linear map $\G(E)\to\G(E')$ belongs to $$\Hom_{\Co(X)}(\G(E),\G(E'))\simeq\G(E)^\ast\otimes_{\Co(X)}\G(E')\simeq\G(E^\ast)\otimes_{\Co(X)}\G(E'),$$
+ $\G(\tau)$ belongs to the leftmost term, while $\Theta^{-1}(\tau)$ to the rightmost one and that concludes the proof.
+\end{proof}
+\begin{remark}
+ $\G$ is also faithful: $\G(\tau)=\G(\sigma)\implies\tau=\sigma$.
+\end{remark}
+\begin{lemma}\label{lemma: Gamma is exact}
+ $\G$ is exact.
+\end{lemma}
+\begin{proof}
+ If $\tau\colon E\to E'$ has constant rank then $\G(\ker(\tau))\simeq\ker(\G(\tau))$ and $\G(\ran(\tau))\simeq\ran(\G(\tau))$. Now if $$\begin{tikzcd}0\arrow[r] & E'\arrow["\alpha",r] & E \arrow["\beta",r] & E''\arrow[r] & 0 \end{tikzcd}$$ is exact then $\ran(\G(\alpha))\simeq\G(\ran(\alpha))$ and $\G(\ker(\beta))\simeq\ker(\G(\beta))$, so 
+ $$\begin{tikzcd}0\arrow[r] & \G(E')\arrow["\G(\alpha)",r] & \G(E) \arrow["\G(\beta)",r] & \G(E'')\arrow[r] & 0 \end{tikzcd}$$ is also exact. Moreover if $\sigma\colon E''\to E$ splits $\beta$, then $\G(\sigma)$ splits $\G(\beta)$.
+\end{proof}
+
+\subsection{Modules}
+In this section $A$ will denote an unital ring (for example an algebra).
+
+\begin{definition}
+ A \emph{morphism of right $A$-modules} $\varphi\colon\E\to\E'$ is a linear map such that $\varphi(sa)=\varphi(s)a$ for all $s\in\E$ and $a\in A$.
+\end{definition}
+
+\begin{definition}
+ A right $A$-module $\E$ is called
+ \begin{itemize}
+  \item \emph{Free} if it has an $A$-basis, i.e. a set of generators $T\subseteq\E$ such that $t_1a_1+\ldots+t_na_n=0$ implies $a_i=0$ for all $i$ and all $a_l\in A,t_m\in T$.
+  \item \emph{Finitely generated} if it has a finite generating set.
+  \item \emph{Projective} if for every morphism $\varphi:\E\to\mathcal G$ and a surjective morphism $\eta\colon\mathcal F\to\mathcal G$ there is a morphism $\psi\colon\E\to\mathcal F$ such that $\varphi=\eta\circ\psi$, where $\mathcal G$ and $\mathcal F$ are arbitrary right $A$-modules.
+ \end{itemize} 
+\end{definition}
+
+\begin{lemma}\noindent 
+ \begin{enumerate} \label{lemma: free}
+  \item Every free module is projective.
+  \item If $\E=\bigoplus_{j\in J}\E_j$, then $\E$ is projective iff $\E_j$ is projective for every $j\in J$.
+ \end{enumerate}
+\end{lemma}
+
+\begin{proposition} 
+The following are equivalent:
+ \begin{enumerate}
+  \item $\E$ is projective.
+  \item There is a module $\E'$ such that $\E\oplus\E'$ is free.
+  \item There exist a free module $\F$ and $p=p^2\in\End_A(\F)$ such that $\E\simeq p(\F)$.
+ \end{enumerate}
+\end{proposition}
+
+\begin{proof}\noindent 
+ \begin{itemize}
+ \item $(1)\implies(2):$ If $\E$ is projective any exact sequence $$\begin{tikzcd}0\arrow[r] & \mathcal G'\arrow[r] & \mathcal G \arrow[r] & \E\arrow[r] & 0 \end{tikzcd}$$ splits since $\Id:\E\to\E$ lifts to a splitting $E\to\mathcal G$. Pick a generating set $\{x_j\}_{j\in J}\subseteq\E$ and let $\F$ be the free module with generators $\{\delta_j\}_{j\in J}$. Define $\eta\colon\F\to\E$ by $\delta_j\to x_j$. Then $$\begin{tikzcd}0\arrow[r] & \mathcal \ker\eta\arrow[r] & \mathcal \F \arrow[r] & \E\arrow[r] & 0 \end{tikzcd}$$ is exact, hence it splits and therefore $\E\oplus\ker\eta\simeq\F$.
+ \item $(2)\implies(1):$ If $\E\oplus\E'$ is free then it is projective and so is $\E$, by Lemma \eqref{lemma: free}.
+ \item $(2)\implies(3):$ Given a split exact sequence $$\begin{tikzcd}0\arrow[r] & \mathcal \E\arrow[r] & \mathcal \F \arrow[r] & \E'\arrow[r] & 0 \end{tikzcd}$$ with $\F\simeq\E\oplus\E'$ define $p\in\End_A(\F)$ by $\F\to\E'\to\F$, where the second map is the splitting. Then $\E'\simeq p(\F)$ and $p=p^2$.
+ \item $(3)\implies(2):$ If $\E=p(\F)$ with $p=p^2$ then $\F\simeq\E\otimes(1-p)\F$.
+ \end{itemize}
+\end{proof}
+
+\begin{corollary}\label{corollary: fgp}
+ The following are equivalent:
+ \begin{enumerate}
+  \item $\E$ is finitely generated and projective (also denoted by fgp).
+  \item There exist $\E'$ such that $\E\oplus\E'\simeq A^{\oplus n}$ for some finite $n$.
+  \item $\E\simeq pA^{\oplus n}$ for some $p=p^2\in M_n(A)$.
+ \end{enumerate}
+\end{corollary}
+
+\subsection{Serre-Swan Duality}
+\begin{proposition}
+ Given a vector bundle $E\to X$, $\G(E)$ is fgp.
+\end{proposition}
+\begin{proof}
+ By Proposition \eqref{prop: direct sum}here exist an $F\to X$ such that $$\begin{tikzcd} 0\arrow[r] & F\arrow[r] & X\times\C^n\arrow[r] & E\arrow[r] & 0\end{tikzcd}$$
+ is split exact. By Lemma \eqref{lemma: Gamma is exact} 
+ $$\begin{tikzcd} 0\arrow[r] & \G(F)\arrow[r] & \Co(X)^{\oplus n}\arrow[r] & \G(E)\arrow[r] & 0\end{tikzcd}$$ is also split exact and we can conclude applying $(2)\implies(1)$ from Corollary \eqref{corollary: fgp}
+\end{proof}
+
+\begin{theorem}[Serre-Swan]
+ Every fgp $\Co(X)$-module is of the form $\G(E)$ for some vector bundle $E\to X$. Thus $\G$ is an equivalence of categories between vector bundles over $X$ with morphisms of vector bundles and fgp $\Co(X)$-modules with $\Co(X)$-linear maps.
+\end{theorem}
+\begin{proof}
+ Let $\E$ be a fgp $\Co(X)$-module. Then there is $p=p^2\in M_m(\Co(X))$ such that $\E=p\Co(X)^{\oplus m}$ and $$\begin{tikzcd} 0\arrow[r] & \ker p\arrow[r] & \Co(X)^{\oplus m}\arrow[r] & \E\arrow[r] & 0\end{tikzcd}$$ is split exact, by Corollary \eqref{corollary: fgp}. Since $\G$ is full and faithful $p:\Co(X)^{\oplus m}\to\Co(X)^{\oplus m}$ induces a morphism of vector bundles $\tau\colon X\times \C^m\to X\times \C^m$.
+ 
+ \noindent Now note that the functions $x\mapsto\rank(\tau_x)$ and $x\mapsto\rank(1-\tau_x)=m-\rank(\tau_x)$, where the last equality holds because $\tau_x$ is idempotent, are both lower semicontinuous. Hence $\tau_x$ is continuous and in particular it must be locally constant. So $\ran(\tau)$ is a subbundle of $X\times\C^m$ and $$\G(\ran(\tau))=\{\tau\circ s\mid s\in\G(X\times \C^m)\}\simeq\ran(p)\simeq\E.$$
+ 
+ \noindent For the second part recall that $\G$ is an equivalence of categories iff it is fully faithful (already proved) and essentially surjective, which we've just shown.
+ 
+ \noindent \red{TODO: I don't think this proof is very clear as written and details should be added.}
+\end{proof}

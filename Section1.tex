@@ -1,0 +1,53 @@
+\section{$C^\ast$-Algebras}
+\subsection{Banach Algebras and $C^\ast$-algebras}
+\begin{definition}
+ A \emph{Banach algebra} is an algebra $A$ with a submultiplicative norm $\|\cdot\|\colon A\to [0,\infty)$ such that $(A,\|\cdot\|)$ is a Banach space. Submultiplicative means that $\|ab\|\leq\|a\|\|b\|$ for all $a,b\in A$.
+\end{definition}
+
+\begin{exercise}
+ Multiplication is continuous with respect to the topology induced by $\|\cdot\|$ on $A$ and $A\times A$ (the latter with the product topology).
+\end{exercise}
+
+\noindent Classical example are $A=\B(X)$, the algebra of bounded operators on a Banach space $X$, with the operator norm or closed subalgebras of $\B(X)$. We often assume that $A$ is unital, since we can always consider $A\oplus\C$ if it isn't.
+
+\begin{definition}
+ If $A$ is a Banach algebra and $a\in A$, we define the \emph{spectrum of $a$} as $$\sp(a)=\{\lambda\in A\mid \lambda-a\text{ is not invertible}\}.$$ 
+\end{definition}
+\begin{definition}
+ If $A$ is a Banach algebra and $a\in A$, we define the \emph{spectral radius of $a$} as $$r(a)=\sup_{\lambda\in\sp(a)}|\lambda|.$$
+\end{definition}
+
+\begin{theorem}
+ For every Banach algebra $A$ and every $a\in A$, $\sp(a)$ is a nonempty compact subset of $\C$ and $r(a)\leq\|a\|$. Furthermore $$r(a)=\lim_{n\to\infty}\|a^n\|^{1/n}.$$
+\end{theorem}
+
+\begin{definition}
+ If $A$ is a Banach algebra, we define a \emph{character of $A$} to be a nonzero homomorphism $\gamma\colon A\to\C$.
+\end{definition}
+\begin{definition}
+ If $A$ is a Banach algebra, we define the \emph{spectrum $\wh{A}$ of $A$} as the set of all characters of $A$.
+\end{definition}
+
+\begin{fact}
+ If $\gamma\colon A\to\C$ is a character then $\ker(\gamma)$ is a "regular maximal" ideal, in particular $\ker(\gamma)$ is a closed ideal. This ensures that $\gamma$ is bounded, hence continuous, so $\wh{A}\subseteq A^\ast$, where $A^\ast=\B(A\to\C)$ is the dual of $A$.
+ 
+ \noindent In particular if we consider a topology on $A^\ast$ we get an induced topology on $\wh{A}$. We will consider $A^\ast$ as a locally convex vector space with the weak-$\ast$ topology. Remember that for $\varphi_\lambda,\varphi\in A^\ast$ we have $$\begin{tikzcd}\varphi_\lambda\arrow["\text{w-}\ast",r] & \varphi\iff\varphi_\lambda(a)\arrow[r] &\varphi(a)\end{tikzcd},$$ for all $a\in A$.
+\end{fact}
+
+\begin{lemma}
+ If $A$ is a Banach algebra then $A^\ast$ with the weak-$\ast$ topology is an Hausdorff space.
+\end{lemma}
+\begin{proof}
+ Let $\varphi_1,\varphi_2\in A^\ast$ be two distinct functionals. Then there is an $a\in A$ with $\varphi_1(a)\neq\varphi_2(a)$. Let $\mathcal O_1$ and $\mathcal O_2$ be open disjoint nbhds of $\varphi_1(a)$ and $\varphi_2(a)$ in $\C$ and let $$\U_j=\mathrm{ev}_a^{-1}(\mathcal O_j)=\{\varphi\in A^\ast\mid\varphi(a)\in\mathcal O_j\}.$$
+ In particular $\U_1$ and $\U_2$ are weak-$\ast$ open and separate $\varphi_1$ and $\varphi_2$, which concludes the proof.
+\end{proof}
+
+\noindent We can now consider $\wh{A}$ as a topological space with the subspace topology inherited from $A^\ast$.
+
+\begin{proposition}
+ If $A$ is a Banach algebra, then $\wh{A}$ is locally compact. If $A$ is also unital then $\wh{A}$ is compact.
+\end{proposition}
+\begin{proof}
+ The closed unit ball $B^\ast\subseteq A^\ast$ is weak-$\ast$ compact by the Banach-Alaoglu theorem and $\wh{A}\cup\{0\}\subseteq B^\ast$.
+ \red{THE FIRST LECTURE IS INCOMPLETE AND NEEDS TO BE WRITTEN FROM HERE}
+\end{proof}

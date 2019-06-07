@@ -1,0 +1,201 @@
+\section{K-Theory}
+K-theory is a cohomology theory that will give us topological invariants associated to a $C^\ast$-algebra. Since we will only obtain a semigroup rather than a cohomology group we first need to introduce an algebraic construction, known as the Grothendieck group which is, in some sense, "the most general" way to turn a semigroup into a group.
+
+\subsection{The Grothendieck Group}
+\begin{definition}
+ Given a unital commutative semigroup $S$, the \emph{Grothendieck Group} of $S$ is the \emph{universal enveloping Abelian group} $G(S)$ defined as $$G(S)=S\times S/\sim=\{[(s,t)]\mid s,t\in S\},$$
+ where $(s_1,t_1)\sim(s_2,t_2)\iff\exists r\in S(s_1+t_2+r=s_2+t_1+r)$.
+\end{definition}
+\begin{remark}
+ Note that if $S$ has cancellation, meaning that $s+r=t+r\implies s=t$, for all $s,r,t\in S$, then we can forget about $r$ in the definition of $\sim$, but it is needed in general to ensure that $\sim$ is transitive (this similar to the definition of a localization for integral domain vs generic commutative rings with unity).
+\end{remark}
+
+\noindent The intuitive idea is to think of $[(s,t)]$ as $s-t$. This leads naturally to the following
+\begin{definition}
+ If $[(s_1,t_1)],[(s_2,t_2)]\in G(S)$, then \begin{align*}
+                                             [(s_1,t_1)]+[(s_2,t_2)]&=[(s_1+s_2,t_1+t_2)] \\
+                                             -[(s,t)]&=[(t,s)]
+                                            \end{align*}
+
+\end{definition}
+
+\noindent There is a natural map $S\to G(S)$ given by $s\mapsto [(s,0)]$, which we will also denote simply by $[s]$ and this map is injective iff $S$ has cancellation. Note that $[(s,t)]=[s]-[t]$. The Grothendieck group $G(S)$ satisfies the following universal property: For any abelian group $H$ and any semigroup homomorphism $\varphi\colon S\to H$ there exist a map $\widetilde{\varphi}\colon G(S)\to H$ such that the diagram
+$$\begin{tikzcd}
+   S\arrow["\varphi",r] \arrow[d] & H \\
+   G(S) \arrow["\widetilde{\varphi}"',ur,dashrightarrow]
+  \end{tikzcd}
+$$
+commutes.
+
+\noindent For a concrete example if $S=\N$ then $G(S)=\Z$.
+
+\subsection{Topological K-Theory}
+If $X$ is a compact Hausdorff space then the set of isomorphism calsses of $\C$-vector bundles over $X$, denoted with $V(X)$, is an abelian semigroup with direct sum as operation and with identity the class of the trivial $0$-dimensional bundle $X\to X$.
+
+\begin{definition}
+ The \emph{(even) K-theory of $X$} is defined as $K^0(X)=G(V(X))$.
+\end{definition}
+\begin{definition}
+ Given a continuous map $f\colon X\to Y$ and a vector bundle $\pi\colon E\to Y$ we can defined the \emph{pullback bundle} $f^\ast E\to X$ with fibers $(f^\ast E)_x=E_{f(x)}$ as $$f^\ast E=\{(v,x)\in E\times X\mid \pi(v)=f(x)\}.$$
+\noindent Since $f^\ast E\subseteq E\times X$ the map $f^\ast E\to X$ is simply the restriction of the projection $E\times X\to X$. Note also that given $s\in\G(E)$ we can get $s'\in\G(f^\ast E)$ by setting $s'(x)=((s\circ f)(x),x)$.
+ 
+\noindent In particular a map $f\colon X\to Y$ induces a map $K^0(f)=f^\ast\colon K^0(Y)\to K^0(X)$ by $[E]\mapsto [f^\ast E]$.
+\end{definition}
+\begin{fact}
+ $K^0$ is a contravariant functor from the category of compact Hausdorff spaces and continuous maps to the category of Abelian groups and group homomorphisms.
+\end{fact}
+
+\noindent For example if $X=\{\bullet\}$ is a space with a single point we get $V(X)=\N$ (there's one isomorphism class for every possible dimension of the vector bundle which is just a vector space) and so $K^0(X)=\Z$
+
+\subsection{K-Theory for $C^\ast$-algebras}
+By Serre-Swan the natural analogue in the case of a $C^\ast$-algebra $A$ is to consider the isomorphism classes of fgp $A$-modules over $A$, denoted with $V(A)$, which is a semigroup with addition induced by the direct sum of modules and the trivial module $0$ as identity element. Keeping the analogy with topological spaces we have
+\begin{definition}
+ The \emph{(even) K-theory of $A$} is defined as $K_0(A)=G(V(A))$. 
+\end{definition}
+
+\noindent Once again given any homomorphism $\varphi\colon A\to B$ for a $C^\ast$ algebra $B$ and a fgp $A$-module $\E$ we want to construct a pushforward $B$-module, to turn $K_0$ into a functore. We know that there is an idempotent $e\in M_n(A)$ such that $\E\simeq eA^{\oplus n}$ by Corollary \eqref{corollary: fgp}. Since $\varphi$ extends to $M_n(A)\to M_n(B)$ we obtain an idempotent $\varphi(e)\in M_n(B)$, so we can define $\varphi_\ast(\E)=\varphi(e)B^{\oplus n}$. Thus $\varphi\colon A\to B$ induces a map $K_0(\varphi)=\varphi_\ast\colon K_0(A)\to K_0(B)$ by $[\E]\mapsto[\varphi_\ast(\E)]$.
+
+\begin{fact}
+ $K_0$ is a functor from the category of unital $C^\ast$-algebras to the cateogry of Abelian groups.
+\end{fact}
+
+\begin{lemma}
+ By Serre-Swan we obtain $K_0(\Co(X))\simeq K^0(X)$.
+\end{lemma}
+
+\subsection{K-Theory through projections}
+\begin{definition}
+ Given a $C^\ast$-algebra $A$ a \emph{projection} in $A$ is a self-adjoint idempotent, i.e. a $p\in A$ with $p=p^2=p^\ast$.
+\end{definition}
+
+\begin{definition}
+ Consider the following equivalence relations for projections $p,q\in A$:
+ \begin{itemize}
+  \item Homotopy: $p\simh q$ iff $\exists e=e^\ast=e^2\in\Co([0,1],A)$ such that $e(0)=p$ and $e(1)=q$.
+  \item Unitary: $p\simu q$ iff $\exists u\in A$ with $uu^\ast=1=u^\ast u$ and $q=upu^\ast$.
+  \item Murray-Von Neumann: $p\sim q$ iff $\exists v\in A$ such that $v^\ast v=p$ and $vv^\ast=q$.
+ \end{itemize}
+ Note that in the last definition we can assume wlog that $v=vv^\ast v=qv=vp$ (if not replace $v$ with $qv$).
+\end{definition}
+
+\begin{proposition}
+ $p\simh q\implies p\simu q\implies p\sim q$.
+\end{proposition}
+\begin{proof}
+ For the first implication we can assume wlog that $\|p-q\|<1$ (pick a continuous path joining $p$ and $q$ and split it into pieces of length less than $1$) and define $$r=\frac12((2q-1)(2p-1)+1).$$ Then $qr=qp=rp$ and $r^\ast rp=r^\ast qr=(qr)^\ast r=(rp)^\ast=pr^\ast r$ so $p$ commutes with $r^\ast r$ and hence also with $|r|=(r^\ast r)^{1/2}$. Furthermore $r$ is invertible:
+ $$\|r-1\|=\|2qp-q-p\|=\|(q-p)(2p-1)\|\leq\|q-p\|<1$$
+ where the inequality before the last one holds because $\|2p-1\|\leq 1$, since $p$ is a projection.
+ 
+ \noindent Now take $u=r|r|^{-1}$. Then we have $upu^\ast=rp|r|^{-2}r^\ast=qrr^{-1}=q$, as desired.
+ 
+ \noindent For the second implication suppose $q=upu^\ast$ and take $v=up$. It is easy to see that $v$ satisfies the necessary equalities.
+\end{proof}
+
+\noindent The reverse implications are not true, but we can reverse them if we allow for "more room".
+\begin{proposition}\noindent 
+ \begin{enumerate}
+  \item $p\sim q\implies \begin{pmatrix} p & 0 \\ 0 & 0\end{pmatrix}\simu \begin{pmatrix} q & 0 \\ 0 & 0\end{pmatrix}$.
+  \item $p\simu q\implies\begin{pmatrix} p & 0 \\ 0 & 0\end{pmatrix}\simh \begin{pmatrix} q & 0 \\ 0 & 0\end{pmatrix}$.
+ \end{enumerate}
+\end{proposition}
+\begin{proof}\noindent 
+ \begin{enumerate}
+  \item Let $p=v^\ast v$, $q=vv^\ast$. Assume that $v$ is a partial isometry, i.e. $v=vv^\ast v=vp=qv$. Consider the unitary $$u=\begin{pmatrix} 1-q & v \\ v^\ast & 1-p\end{pmatrix}\begin{pmatrix} 1-p & p \\ p & 1-p\end{pmatrix}$$
+
+ Then $$u\begin{pmatrix} p & 0 \\ 0 & 0\end{pmatrix}u^\ast=\begin{pmatrix} q & 0 \\ 0 & 0\end{pmatrix}.$$
+ \item If $q=upu^\ast$, consider $$v_t=\begin{pmatrix} \cos(\frac{\pi t}2) & \sin(\frac{\pi t}2) \\ \sin(\frac{\pi t}2) & \cos(\frac{\pi t}2)\end{pmatrix}\quad \text{ and }w_t=v_t\begin{pmatrix} u & 0 \\ 0 & 1\end{pmatrix}v_{-t}\begin{pmatrix} 1 & 0 \\ 0 & u^\ast\end{pmatrix}.$$
+ Let $p_t=w_t\begin{pmatrix} p & 0 \\ 0 & 0\end{pmatrix}w_t^\ast$. Then $p_0=\begin{pmatrix} q & 0 \\ 0 & 0\end{pmatrix}$ and $p_1=\begin{pmatrix} p & 0 \\ 0 & 0\end{pmatrix}.$
+  \end{enumerate}
+\end{proof}
+
+\noindent Thus to make those equivalence relations the same we need to "stabilize". To make this idea precise consider the $C^\ast$ algebras $M_n(A)$ with the isometric inclusions $M_n(A)\hookrightarrow M_{n+1}(A)$, $a\mapsto\begin{pmatrix} a & 0\\0 & 0\end{pmatrix}$ and consider $$M_\infty(A)=\bigcup_{n\in\N}M_n(A).$$ Note that $M_\infty(A)$ is not a $C^\ast$-algebra since it isn't complete. 
+
+\begin{definition}
+ For $p\in M_m(A)$ and $q\in M_n(A)$ two projections we say that $p$ and $q$ are stably equivalent, denoted by $p\approx q$, iff $p\sim q$ in $M_N(A)$ for some $N$ large enough. Similarly for $\Simh$ and $\Simu$.
+\end{definition}
+
+\begin{corollary}
+ The relations $\approx$,$\Simu$ and $\Simh$ coincide on the set $\Proj(M_\infty(A))$ of projections in $M_\infty(A)$.
+\end{corollary}
+
+\begin{definition}
+ Let $K_0^+(A)$ denote $\Proj(M_\infty(A))/\approx$. Note that if we wanted to have a $C^\ast$-algebra we could equivalently take $\overline{M_\infty(A)}=A\otimes K$. 
+\end{definition}
+
+\noindent We can make $K_0^+(A)$ into an abelian semigroup by setting $[p]+[q]=\left[\begin{pmatrix}p & 0 \\ 0 & q\end{pmatrix}\right]$ and identity element $[0]$. This naturally brings us to
+
+\begin{definition}
+ The \emph{(even) K-theory of $A$} is $K_0(A)=G(K_0^+(A))$.
+\end{definition}
+
+We now look at some examples.
+\begin{enumerate}
+ \item $p,q\in M_\infty(\C)$ are stably equivalent iff $\rank(p)=\rank(q)$, hence $K_0^+(\C)=\N$ and $K_0(\C)=\Z$.
+ \item Since $M_m(M_n(\C))=M_{mn}(\C)$ we have $M_\infty(M_n(\C))=M_\infty(\C)$ \red{why? aren't we missing some small ones?}, hence $K_0(M_n(\C))=\Z$ (this makes sense since $M_n(\C)\simeq \C^{n^2}$ is contractible).
+ \item Let $K=\K(H)$ be the space of compact operators on an Hilbert space $H$. For any projection $p\in K$ we hanve $\rank(p)<\infty$ and again $K_0(K)=\Z$.
+ \item If instead we look at $\B(H)$, the space of bounded operators on an Hilbert space $H$ and take a projection $p\in\B(H)$, we may have $\rank(p)=\infty$, hence $K_0^+(\B(H))=\N\cup\{\infty\}$ and, since $m+\infty=n+\infty$ for all $n,m\in\N$, we have $K_0(\B(H))=0$.
+\end{enumerate}
+
+\begin{proposition}\label{prop: homotopy}
+ The set of idempotents in $A$ is homotopy equivalent to the set of projections. \red{I don't think homotopy equivalent is the correct term here, or at least I don't fully understand what it's meant}
+\end{proposition}
+\begin{proof}
+ Given $e=e^2$ an idempotent in $A$ define
+ \begin{itemize}
+  \item An invertible positive \red{positive?} element $z=1+(e-e^\ast)(e^\ast-e)$ such that $ez=ee^\ast e=ze$ and $e^\ast z=e^\ast ee^\ast=ze^\ast$.
+  \item A projection $p=ee^\ast z^{-1}$ such that $ep=p$ and $pe=e$.
+  \item A continuous path of idempotents, for $t\in[0,1]$ let $$e_t=(1-tp-te)e(1+te-tp)$$ and note that $e_0=e$ and $e_1=p$.
+ \end{itemize}
+\end{proof}
+
+\begin{corollary}
+ For every fgp module $\E$ over $A$ there is $p=p^\ast=p^2\in M_n(A)$ such that $\E=pA^{\oplus n}$.
+\end{corollary}
+\begin{proof}
+ We have $\E=eA^{\oplus n}$ for some $e=e^2$, by Corollary \eqref{corollary: fgp}. By Proposition \eqref{prop: homotopy} we can find $p=p^\ast=p^2$ with $pe=e$ and $ep=p$. Then we have 
+ \begin{align*} 
+  \E=eA{^\oplus n}=peA^{\oplus n}&\subseteq pA^{\oplus n} \\
+  pA^{\oplus n}=epA^{\oplus n}\subseteq e&A^{\oplus n}=\E
+ \end{align*}
+\end{proof}
+
+\subsection{Equivalence of the two definitions of K-theory}
+\noindent We now have two definitions of $K_0(A)$ for a $C^\ast$-algebra $A$, through isomorphism classes of fgp modules over $A$ and through projections up to stable equivalence. We also have maps $$\begin{tikzcd}\{\text{fpg $A$-modules}\}\arrow["\E=eA^{\oplus n}",r]&\{\text{idempotents in $M_n(A)$}\}\arrow["\text{homotopy}",r]&\{\text{projections in $M_\infty(A)$}\} \end{tikzcd}$$
+and it's natural to ask whether starting with two isomorphic modules gives us two stably equivalent projections and viceversa.
+\begin{theorem}
+ The map $K_0^+(A)\to V(A)$, $[p]\mapsto[pA^{\oplus n}]$ is an isomorphism. In particular $K_0(A)=G(V(A))\simeq G(K_0^+(A))$.
+\end{theorem}
+\begin{proof}
+ One direction is easy: suppose $p,q\in M_\infty(A)$ are stably equivalent projections, in particular $q=upu^\ast$ for some unitary $u$. Then $u\colon pA^{\oplus m}\to qA^{\oplus m}$ is the desired isomorphism.
+ 
+ \noindent The converse direction requires more work. Suppose that $\E$ and $\F$ are isomorphic fgp $A$-modules, so there exist projection $p,q\in M_N(A)$ with $pA^{\oplus N}\simeq\E\simeq\F\simeq qA^{\oplus N}$. We want to show that this implies $p\approx q$. Let $\varphi$ denote the map $pA^{\oplus N}\to qA^{\oplus N}$ obtained composing the isomorphisms above. We obtain $g,h\in M_N(A)$ given, for $v\in A^{\oplus N}$, by $gv=\varphi(pv)$ and $hv=\varphi^{-1}(qv)$. Then $gh=p$, $hg=p$ and $g=gp=qg$, $h=hq=ph$. Let $$z=\begin{pmatrix}g & 1-q \\ 1-p & h\end{pmatrix}\in M_{2N}(A).$$
+ Then $z$ is invertible and we have $$z^{-1}=\begin{pmatrix} h & 1-p \\ 1-q & g\end{pmatrix}\text{  and  } z\mat{p}z^{-1}=\mat{q}.$$
+ We now want to replace $z$ with a unitary matrix. Let $u=z|z|^{-1}$, where $|z|=(z^\ast z)^{1/2}$. Then $|z|p|z|^{-1}=|z|z^{-1}qz|z|^{-1}=u^\ast q u=(u^\ast qu)^\ast=|z|^{-1}p|z|$, so $p$ commutes with $|z|^{-1}$ and $|z|$.
+ 
+ \noindent But now $q=u|z|p|z|^{-1}u^\ast=upu^\ast$.
+\end{proof}
+
+\subsection{Standard picture of K-theory}
+Note that given projections $p\in M_n(A),q\in M_m(A)$, there is $p'\in M_{n+m}(A)$ such that $[p]-[q]=[p']-[\Id_n]\in K_0(A)$. Indeed $$[p]-[q]=\left[\mat{p}\right]-\left[\matm{q}\right]=\left[\begin{pmatrix}p & 0 \\ 0 & \Id_n-q\end{pmatrix}\right]-\left[\matm{\Id_n}\right].$$
+
+\begin{theorem}
+ The functor $K_0$ from unital $C^\ast$-algebras to Abelian groups has the following properties:
+ \begin{itemize}
+  \item Homotopy invariance: if $A$ and $B$ are homotopy equivalent $C^\ast$-algebras. then $K_0(A)=K_0(B)$.
+  \item Stability: $K_0(A\otimes K)\simeq K_0(A)$ where $K=\K(H)$ is an algebra of compact operators on a separable Hilbert space.
+  \item Continuity: if $A_1\subseteq A_2\subseteq A_3\subseteq\cdots$ then $\varinjlim K_0(A_n)\simeq K_0(\varinjlim A_n)$.
+  \item Half-Exactness: If $\begin{tikzcd}0\arrow[r]& J\arrow["i",r] & A \arrow["\pi",r] & B\arrow[r] & 0\end{tikzcd}$ is exact then $\begin{tikzcd}K_0(J)\arrow["K_0(i)",r] & K_0(A)\arrow["K_0(\pi)",r] & K_0(B)\end{tikzcd}$ is exact at $K_0(A)$.
+ \end{itemize}
+\end{theorem}
+
+\noindent Note that in general $K_0(i)$ is not injective: pick $J=\K(H)$, $A=\B(H)$, then we saw that $K_0(J)=\Z$ and $K_0(A)=\{0\}$. In general $K_0(\pi)$ is not surjective because projections in $B$ cannot always be lifted to projections in $A$.
+
+\begin{remark}
+ In the formulation of half-exactness we looked at a short exact sequence of $C^\ast$-algebras, those cannot all be unital. For a unital $C^\ast$-algebra $A$ we have $K_0(A)\simeq\ker(K_0(A\oplus\C)\to K_0(\C))$ so in the nonunital case we can use the right hand side as definition of the (reduced) K-theory of $A$.
+\end{remark}
+\subsection{Higher order K-theory groups}
+Higher order K-theory groups can be defined via suspensions. Let $S(X)=X\times\Bbb R$ for a topological space $X$ and $S(A)=\Co_0(\Bbb R,A)$ for a $C^\ast$-algebra $A$. Then $K_1(A)=K_0(S(A))$ and $K_n(A)=K_0(S^n(A))$. It can also be described explicitely through projections as equivalence classes of unitaries in $M_N(A)$. \red{I'm not sure about the projections thing, but this should just be a side remark and we won't work with higher K-theory.}
+
+\begin{theorem}[Bott periodicity]
+ For all $n\in\N$, $K_n(A)\simeq K_{n+2}(A)$.
+\end{theorem}
