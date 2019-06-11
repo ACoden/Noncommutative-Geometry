@@ -1,5 +1,5 @@
 \section{$C^\ast$-Algebras}
-\subsection{Banach Algebras and $C^\ast$-algebras}
+\subsection{Banach Algebras}
 \begin{definition}
  A \emph{Banach algebra} is an algebra $A$ with a submultiplicative norm $\|\cdot\|\colon A\to [0,\infty)$ such that $(A,\|\cdot\|)$ is a Banach space. Submultiplicative means that $\|ab\|\leq\|a\|\|b\|$ for all $a,b\in A$.
 \end{definition}
@@ -48,6 +48,110 @@
  If $A$ is a Banach algebra, then $\wh{A}$ is locally compact. If $A$ is also unital then $\wh{A}$ is compact.
 \end{proposition}
 \begin{proof}
- The closed unit ball $B^\ast\subseteq A^\ast$ is weak-$\ast$ compact by the Banach-Alaoglu theorem and $\wh{A}\cup\{0\}\subseteq B^\ast$.
- \red{THE FIRST LECTURE IS INCOMPLETE AND NEEDS TO BE WRITTEN FROM HERE}
+ The closed unit ball $B^\ast\subseteq A^\ast$ is weak-$\ast$ compact by the Banach-Alaoglu theorem and $\wh{A}\cup\{0\}\subseteq B^\ast$. For $\gamma\in\wh{A}$ we have $|\gamma(a)|=|\gamma(a^n)|^{1/n}\leq\|\gamma\|^{1/n}\|a^n\|^{1/n}$ for all $n\in\N$. Hence $$|\gamma(a)|\leq\lim_{n\to\infty}\|\gamma\|^{1/n}\|a^n\|^{1/n}=r(a)\leq\|a\|,$$ thus $\|\gamma\|\leq 1$.
+ 
+ \noindent Now let $\varphi_\lambda$ be a net in $\wh{A}\cup\{0\}$ which converges to $\varphi\in B^\ast$. For $a,b\in A$ we have $\varphi(ab)=\lim\varphi_\lambda(ab)=\lim\varphi_\lambda(a)\varphi_\lambda(b)=\varphi(a)\varphi(b)$. We have just shown that $\wh{A}\cup\{0\}$ is closed, hence it is also weak-$\ast$ compact, being contained in a compact set. Since $\{0\}$ is closed $\wh{A}$ is open, hence locally compact. Furthermore if $A$ is unital we have $\varphi(1)=1$ for all $\varphi\in\wh{A}$, so $\{0\}$ is an isolated point in $\{0\}\cup\wh{A}$ and $\wh{A}$ is closed, hence compact.
 \end{proof}
+\subsection{The Gelfand Transform}
+\begin{definition}
+ The \emph{Geldanf Transform} is the map $\G\colon A\to\Co(\wh{A})$, $a\mapsto\wh{a}$, where $\wh{a}(\varphi)=\varphi(a)$.
+\end{definition}
+\begin{theorem}
+ $\G$ is a norm decreasing homomorphism and $\G(A)$ separates points in $\wh{A}$.
+\end{theorem}
+\begin{proof}\noindent
+ \begin{itemize}
+  \item $\G$ is an homomorphism because $\varphi$ is.
+  \item $\|\G\|\leq\sup_{\varphi\in\wh{A}}\|\varphi\|\leq 1$.
+  \item If $\varphi_1,\varphi_2$ are distinct elements of $\wh{A}$ then there is $a\in A$ with $\wh{a}(\varphi_1)\neq\wh{a}(\varphi_2)$.
+ \end{itemize}
+\end{proof}
+
+\begin{proposition}
+ If $A$ is a unital $C^\ast$-algebra then $\sp(a)=\ran(\wh{a})$ for all $a\in A$. If $A$ is not unital then $\sp(a)=\ran(\wh{a})\cup\{0\}$.
+\end{proposition}
+\begin{corollary}
+ $\|\G(a)\|=\|\wh{a}\|=r(a)$ and so $\ker\G=\{a\in A\mid r(a)=0\}$.
+\end{corollary}
+
+\noindent For example if $T$ is a locally compact Hausdorff space then we have $T\simeq \wh{\Co_0(T)}$ via $t\mapsto \mathrm{ev}_t$. For $f\in\Co_0(T)$, $G(f)=\wh{f}$ is given by $\wh{f}(\mathrm{ev}_t)=\mathrm{ev}_t(f)=f(t)$. 
+
+\subsection{$C^\ast$-algebras}
+\begin{definition}
+ An \emph{involution} of an algebra $A$ is a map $a\mapsto a^\ast$ such that 
+ \begin{itemize}
+  \item $(\lambda a+b)^\ast=\overline{\lambda}a^\ast+b^\ast$ for all $\lambda\in\C$, $a,b\in A$.
+  \item $a^{\ast\ast}=a$ for all $a\in A$.
+  \item $(ab)^\ast=b^\ast a^\ast$ for all $a,b\in A$.
+ \end{itemize}
+\end{definition}
+
+\begin{definition}
+ A \emph{$C^\ast$-algebra} is a Banach algebra $(A,\|\cdot\|)$ with an involution $a\mapsto a^\ast$ such that $\|a^\ast a\|=\|a\|^2$ for all $a\in A$.
+\end{definition}
+\begin{exercise}
+ Show that $\|a^\ast\|=\|a\|$.
+\end{exercise}
+
+\noindent For the rest of this section $A$ will denote a $C^\ast$-algebra.
+
+\begin{proposition}
+ If $a\in A$ is normal, that is $a^\ast a=aa^\ast$, then $r(a)=\|a\|$.
+\end{proposition}
+\begin{proof}
+ If $b=b^\ast\in A$ we have $\|b^2\|=\|b^\ast b\|=\|b\|^2$ and so $\|b^{2^n}\|=\|b\|^{2^n}$.
+ 
+ \noindent Now if $a\in A$ is normal we have $\|a\|^{2^n}=\|a^\ast a\|^{2^{n-1}}=\|(a^\ast a)^{2^n}\|^{1/2}=\|(a^\ast)^{2^n}a^{2^n}\|^{1/2}=\|(a^{2^n})^\ast a^{2^n}\|=\|a^{2^n}\|$, so in particular $\|a\|=\lim_{n\to\infty}\|a^{2^n}\|^{2^{-n}}=r(a)$.
+\end{proof}
+
+\begin{corollary}
+ If $A$ is commutative, then $\G$ is injective and isometric.
+\end{corollary}
+\begin{theorem}[Gelfand-Naimark]
+ Let $A$ be a commutative $C^\ast$-algebra. Then the Gelfand transform $\G\colon A\to\Co_(\wh{A})$ is an isometric $\ast$-isomorphism.
+\end{theorem}
+\begin{proof}
+ Since $\G$ is isometric and $A$ is complete, $G(A)$ must be closed. Let $\varphi\in\wh{A}$. Then for $a=a^\ast\in A$ we have $\varphi(a)\in\sp(a)\subseteq\R$. For any $a\in A$ we can write $a=h+ik$ for some $h=h^\ast\in A$ and $k=k^\ast\in A$. Then $\varphi(a^\ast)=\varphi(h)-i\varphi(k)=\varphi(\overline{a})$, which implies $\G(a^\ast)=\G(a)^\ast$. Thus $\G(A)\subseteq\Co(\wh{A})$ is a self-adjoint closed subalgebra which separates points. By Stone-Weierstrass it must be dense, hence $G(A)=\Co(\wh{A})$. \red{Some more details wouldn't hurt}
+\end{proof}
+
+\noindent A consequence of this theorem is the so called continuous functional calculus for normal elements of $A$. If $A$ is a unital $C^\ast$ algebra and $a\in A$ is normal, then we have $\wh{C^\ast(a)}\simeq\sp(a)$, where $C^\ast(a)$ is the $C^\ast$-algebra generated by $a$. We get an isomorphism $\psi\colon\Co(\sp(a))\to\Co(\wh{C^\ast(a)})$ and, composing with $\G^{-1}$, we get an isomorphism $\varphi=\G^{-1}\circ\psi\colon\Co(\sp(a))\to C^\ast(a)$. Furthermore we also have the following
+\begin{theorem}
+ For a unital $C^\ast$-algebra $A$ and a normal $a\in A$, the map $\varphi\colon\Co(\sp(a))\to C^\ast(a)$ is the unique isomorphism with $\varphi(1)=1$ and $\varphi(\Id)=a$. For $f\in\Co(\sp(a))$ we write $f(a)=\varphi(f)\in C^\ast(a)\subseteq A$. Then we have the so called \emph{spectral mapping property}: $f(\sp(a))=\sp(f(a))$.
+\end{theorem}
+
+\subsection{Representations}
+\begin{definition}
+ A \emph{representation} of a $C^\ast$-algebra $A$ is a $\ast$-homomorphism $\pi\colon A\to\B(H)$, where $H$ is an Hilbert space.
+\end{definition}
+\begin{definition}
+ A representation $\pi\colon A\to\B(H)$ is called
+ \begin{itemize}
+  \item \emph{Faithful} if $\pi(a)=0\implies a=0$.
+  \item \emph{Irreducible} if there are no nontrivial closed subspaces which are invariant under $\pi(A)$. \red{what does this mean exactly?}
+ \end{itemize}
+\end{definition}
+
+\begin{theorem}[Gelfand-Naimark]
+ Every $C^\ast$-algebra admits a faithful representation.
+\end{theorem}
+
+\noindent Note that if $A$ is commutative then every character of $A$ is also a representation of $A$ (by picking $H=\C$), which is clearly irreducible. Moreover in this case those are the only irreducible representations.
+
+\noindent For a noncommutative $C^\ast$-algebra $A$ we can generalize the definition of $\wh{A}$ by setting $$\wh{A}=\{[\pi]\mid\pi\text{ is an irreducible representation of }A\}$$ where $[\bullet]$ denotes unitary equivalence classes.
+
+\subsection{The group $C^\ast$-algebra of $\Z$}
+We can turn the Banach space $\ell^1(\Z)$ of summable sequences $(f_k)_{k\in\Z}$ into a $\ast$-algebra by setting $$(fg)_k=\sum_{n\in\Z}f_ng_{k-n},\quad (f^\ast)_k=\overline{f_k},\quad \|f\|=\sum|f_n|.$$ 
+Note that this is not a $C^\ast$-algebra, since $\|f^\ast f\|$ is not necessarily $\|f\|^2$. However we have a representation $$\lambda\colon \ell^1(\Z)\to\B(\ell^2(\Z)),\quad (\lambda(f)\psi)_k=\sum_{n\in\Z}f_n\psi_{k-n}$$ satisfying $\|\lambda(f)\|\leq\|f\|$. Now we can define the (reduced) group $C^\ast$-algebra of $\Z$ as $$\Co^\ast_r(\Z)=\overline{\lambda(\ell^1(\Z))}\subseteq\B(\ell^2(\Z))$$.
+
+\begin{proposition}
+ There is an isomorphism $\Co^\ast_r(\Z)\simeq\Co(S^1)$.
+\end{proposition}
+
+\noindent The idea is to identify characters of $\Co^\ast_r(\Z)$ and characters of $\Z$. $\wh{\Co^\ast_r(\Z)}\simeq S^1=\{\chi_k\colon k\mapsto e^{2\pi ikx},x\in\R/\Z\}$.
+
+\begin{proof}
+ Consider $$F\colon\ell^1(\Z)\to\Co(S^1),\quad F(f)(x)=\sum_{n\in\N}f_ne^{2\pi inx},$$ which is an injective $\ast$-homomorphisms, furthermore $F(\ell^1(\Z))$ separates points by Stone-Weierstrass, \red{Stone-Weierstrass? Which version?} in particular $F(\ell^1(\Z))\subseteq\Co(S^1)$ is dense. For $f\in\ell^1(\Z)$,$\psi\in\ell^2(\Z)\cap\ell^1(\Z)$ we have $$\lambda(f)\psi=f\psi=F^{-1}(F(f)F(\psi)),$$ so $\|\lambda(f)\|=\|F(f)\|$. In particular $F$ is an isometry $\ell^1(\Z)\to\Co(S^1)$ with dense image, so it extends to an isometry $\Co^\ast_r(\Z)\to\Co(S^1)$.
+\end{proof}
+
+
+
