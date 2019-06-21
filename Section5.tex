@@ -132,8 +132,49 @@ In fact, since $M$ is compact and $D$ is first order we can say more:
   \item $\mathcal A\cdot\dom(D)\subseteq\dom(D)$ and $[D,a]$ is bounded for $a\in\mathcal A$.
   \item $(D\pm i)^{-1}$ are compact operators.
  \end{enumerate}
-
 \end{definition}
+
+\begin{definition}
+ A spectral triple $\sptr$ is called \emph{even} if there is a "grading operator" $\gamma\in\B(H)$ such that $\gamma=\gamma^\ast$, $\gamma^2=1$, $\gamma D=-D\gamma$ and $\gamma a =a\gamma$ for all $a\in A$. A spectral triple which is not even is called \emph{odd}.
+\end{definition}
+
+\noindent Note that the operators $D\pm i\colon\dom D\to H$ are isometric, when $\dom D$ is equipped with the graph norm. This is a general property of symmetric operators: $\langle (D\pm i)\psi,(D\pm i)\psi\rangle=\langle\psi,\psi\rangle+\langle D\psi,D\psi\rangle=\langle\psi,\psi\rangle_D$. Furthermore since $D$ is self-adjoint we have that $D\pm i$ are also surjective, hence unitary. More precisely $(D\pm i)^{-1}\colon H\to\dom D$ is unitary, while $(D\pm i)^{-1}\colon H\to\dom H$ is compact.
+
+\begin{proposition}
+ $D$ is Fredholm and $\ind(D)=\ind\left(D(1+D^2)^{-1/2}\right)$.
+\end{proposition}
+\begin{proof}
+ We have \begin{align*}
+          \left(D(1+D^2)^{-1/2}\right)^2&=D^2(1+D^2)^{-1} \\
+          &= 1-(1-D^2)^{-1} \\
+          &= 1-(D+i)^{-1}(D-i)^{-1}.
+         \end{align*}
+Hence $D=\underbrace{D(1+D^2)^{-1/2}}_{Fredholm}\underbrace{(1+D^2)^{1/2}}_{unitary}$ is also Fredholm, being a composition of two Fredholm operators. Moreover the index of a composition of Fredholm operators is the sum of the indices and a unitary operator has index $0$.
+\end{proof}
+
+\noindent Once again in the even case we set $H=H^+\oplus H^-$, $D=\begin{pmatrix} 0 & D_- \\ D_+ & 0 \end{pmatrix}$ and we look at $\ind(D_+)$, which is equal to $\ind(D_+(1+D_-D_+)^{-1/2})$.
+
+\begin{definition}
+ Given a spectral triple $\sptr$ we define the \emph{bounded transform} $F_D=D(1+D^2)^{-1/2}$.
+\end{definition}
+\begin{theorem}
+ If $\sptr$ is a spectral triple, then $(H,F_D)$ is a Fredholm module. 
+\end{theorem}
+\noindent We won't prove this theorem, but note that the main difficulty is showing that the $[F_D,a]$ are compact. 
+
+\noindent If $D$ is a 1st order elliptic operator on $M$ we can consider $\sigma_F(x,\xi)=\sigma_D(x,\xi)(1+\sigma_D(x,\xi)^2)^{-1/2}$ and use pseudodifferential calculus to construct an operator $F$ with principal symbol $\sigma_F$. Then $F-F_D$ is compact (negative order) and $F$ and $F_D$ define the same element in $K^0(\Co(M))$.
+
+\begin{theorem}
+ If $A$ is separable, every element in $K^0(A)$ is represented by a Fredholm module which is obtained as the bounded transform of a spectral triple.
+\end{theorem}
+
+
+
+
+
+
+
+
 
 
 
