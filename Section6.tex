@@ -8,14 +8,105 @@
 \noindent Note that if $\{e_1,\ldots,e_n\}$ is an orthonormal basis for $V$, then $$\{e_{j_1}\cdots e_{j_k}\mid 1\leq i_1\leq\cdots\leq i_k,0\leq k\leq n\}$$ is a basis for $\Cl(V)$ (where the empty product is defined to be $1$, the multiplicative identity of the algebra). In particular $\dim\Cl(V)=\sum_{k=0}^n \binom{n}{k} = 2^n$.
 
 \begin{definition}
- The \emph{complex clifford algebra} $\CL(V)$ is defined to be $\Cl(V)\otimes_\R\C$. It has an involution defined by $\lambda v_1\cdots v_k)^\ast=(-1)^k\overline{lambda} v_1\cdots v_k$, $\lambda\in\C$, $v_i\in V$.
+ The \emph{complex clifford algebra} $\CL(V)$ is defined to be $\Cl(V)\otimes_\R\C$. It has an involution defined by $(\lambda v_1\cdots v_k)^\ast=(-1)^k\overline{\lambda} v_1\cdots v_k$, $\lambda\in\C$, $v_i\in V$.
 \end{definition}
 
-\noindent If $V=\R^n$ we write $\Cl_n$ and $CL_n$.
+\noindent If $V=\R^n$ we write $\Cl_n$ and $\CL_n$.
 \begin{fact}[Classification of complex Clifford algebras] If $n=2m$ there is an isomorphism
 $$\CL_n\to M_{2^m}(\C)=\End(\Delta_{2m}),$$ where $\Delta_{2m}$ is the "spinor module".
 
 \noindent If $n=2m+1$ there is an isomorphism $$\CL_n\to M_{2^m}(\C)\oplus M_{2^m}(\C).$$
  \end{fact}
+
+\begin{definition} 
+ The $\spinc$ group is defined as the subgroup of the group of invertible elements of $\CL(V)$ given by 
+ $$\spinc(V)=\{\lambda v_1\ldots v_{2k}\mid \lambda\in\C,|\lambda|=1, v_j\in V, \langle v_j,v_j\rangle=1,1\leq 2k\leq\dim V,1\leq j\leq 2k\},$$
+ note that $(\lambda v_1\ldots v_{2k})^{-1}=\overline{\lambda}v_{2k}\ldots v_1$.
+\end{definition}
+
+\noindent Note that for $x\in V$ and $v\in\spinc(V)$ we have $-vxv=x-2\langle v,x\rangle v$ and $\langle v,v\rangle=1$, thus $v$ determines a reflection map, which extends to a group homomorphism $\varphi\colon\spinc(V)\to\SO(V)$ given by $\varphi(u)(x)=uxu^{-1}$ for $x\in V$ and $u\in\spinc(V)$. Furthermore we have $\ker\varphi=U(1)$ and we have a short exact sequence
+$$\begin{tikzcd}1\arrow[r] & U(1)\arrow[r] & \spinc(V)\arrow[r] & \SO(V) \arrow[r] & 1\end{tikzcd}.$$
+
+\noindent We also have $$\begin{tikzcd}1\arrow[r] & \{\pm 1\}\arrow[r] & \spinc(V)\arrow[r] & \SO(V)\times U(1) \arrow[r] & 1\end{tikzcd}.$$
+
+\subsection{spin$^c$ manifolds, connections and Dirac operators}
+Let $(M,g)$ be a connected, compact, oriented Riemmanian manifold of dimension $n$. For each $x\in M$ we can consider the Clifford algebra $\Cl(T^\ast_xM)$ and form a bundle $\Cl(T^\ast M)\to M$ with them. This bundle is actually independent of the Riemannian metric $g$.
+
+\begin{definition}
+ A Clifford module over $M$ is a Hermitian vector bundle $E\to M$ with a bundle morphism $c\colon\CL(T^\ast M)\to\End(E)$, such that $c(a^\ast)=c(a)^\ast$.
+\end{definition}
+
+\begin{definition}
+ A $\spinc$ structure on $M$ is a Clifford module $S\to M$ such that $c(\Cl(T^\ast M))\simeq\End(S)$. In this case $S$ is called the spinor bundle and $M$ is called a $\spinc$ manifold.
+\end{definition}
+
+\begin{theorem}
+ The following are equivalent:
+ \begin{enumerate}
+  \item There exist a $\spinc$ structure on $M$.
+  \item There exist a principal $\spinc$-principal bundle $\spinc(M)\to M$ which is an equivariant double cover of $\SO(M)\times P$, where $\SO(M)$ is the frame bundle of $M$.
+  \item The Dixmier-Douady class $\delta(\Cl(T^\ast M))$ in $H^3(M;\Z)$ vanishes.
+ \end{enumerate}
+
+ \noindent For example if $\dim M\leq 4$ then $M$ has a $\spinc$ structure.
+\end{theorem}
+
+\begin{definition}
+ A connection on $E\to M$ is a linear map $\nabla\colon\G^\infty(E)\to\G^\infty(T^\ast M\otimes E)$ satisfying the Leibniz rule $\nabla (\psi f)=(\nabla\psi)f+\psi\otimes\mathrm{d}f$. If $\mathfrak X\in\G^\infty(TM)$ is a smooth vector field we get a map $\nabla_{\mathfrak{X}}\colon\G^\infty(E)\to\G^\infty(E)$ called covariant derivative defined for $\sigma\in\G(E)$ by $\nabla_{\mathfrak X}\sigma=(\nabla\sigma)\mathfrak X$ (we're using the natural identification $E\otimes T^\ast M\simeq\mathrm{Hom}(TM,E)$ here).
+\end{definition}
+\begin{definition}
+ Let $E\to M$ be a an Hermitian vector bundle. A connection $\nabla$ on $E\to M$ is called \emph{Hermitian} if it is compatible with the Hermitian structure of the bundle, meaning that for all smooth vector fields $\mathfrak X\in\G^\infty(TM)$ and all $s,t\in\G^\infty(E)$ we have $$\langle\nabla_{\mathfrak X}s,t\rangle+\langle s,\nabla_{\mathfrak X} t\rangle=\mathfrak X\langle s,t\rangle.$$
+\end{definition}
+
+\begin{definition}
+ An Hermitian connection $\nabla$ on a Clifford module $E\to M$ is called a \emph{Clifford connection} if for all $a\in\G^\infty(\Cl(T^\ast M))$ and all $\psi\in\G^\infty(E)$ we have $$\nabla(c(a)\psi)=c(a)\nabla\psi+c(\nabla^ga)\psi,$$ where $\nabla^g$ is the extension of the Levi-Civita connection on $\G^\infty(M)$ to $\G^\infty(\CL(T^\ast M))$, in particular $\nabla^g(ab)=\nabla^g(a)b+a\nabla^g(b)$. 
+\end{definition}
+
+\noindent Remember that the Levi-Civita connection is the only connection $\nabla$ on $TM$ that preserves the metric, meaning that $\nabla_g=0$ and that is torsion free, meaning that for every two vector fields $X,Y$ we have $\nabla_XY-\nabla_YX=[X,Y]$.
+
+\begin{definition}
+ A \emph{(generalized) Dirac operator} on a Clifford module $E\to M$ is an operator $$D=c\circ\nabla=\sum_{j=1}^n(\mathrm{d}x^j)\nabla_{\partial_j},$$ where $\nabla_{\partial_j}$ is a Clifford connection.
+\end{definition}
+
+\noindent Note that since $\sigma_D(\xi)^2=c(\xi)^2=-g(\xi,\xi)\neq 0$, for every $0\neq\xi\in T^\ast M$ we see that $D$ is elliptic.
+
+\begin{proposition}
+ If $D$ is a Dirac operator then $D$ is formally self-adjoint.
+\end{proposition}
+\begin{proof}
+ We have \begin{align*}
+          (\varphi,D\psi)-(D\varphi,\psi)&=(\varphi,c(\mathrm{d}x^j)\nabla_{\partial_j}\psi)-(c(\mathrm{d}x^j)\nabla_{\partial_j}\varphi,\psi) \\ &=(\varphi,c(\mathrm{d}x^j)\nabla_{\partial_j}\psi)-(\varphi,c(\nabla^g_{\partial_j}\mathrm{d}x^j)\psi)+(\nabla_{\partial_j},c(\mathrm{d}x^j)\psi)\\
+          &=\partial_j(\varphi,c(\mathrm{d}x^j)\psi)-(\varphi,c(\nabla^g_{\partial_j}\mathrm{d}x^j)\psi)
+         \end{align*}
+Now define $Z\in\G^\infty(TM)$ by $\alpha(Z)=(\varphi,c(\alpha)\psi)$, for $\alpha\in\G^\infty(T^\ast M)$. Then we have 
+\begin{align*}
+ (\varphi,D\psi)-(D\varphi,\psi)&=\partial(\mathrm{d}x^j(Z))-(\nabla^g_{\partial_j}\mathrm{d}x^j)(Z)\\
+ &=\mathrm{d}x^j(\nabla^g_{\partial_j}Z)\\
+ &=\mathrm{div}(Z)
+\end{align*}
+so we can conclude, by the divergence theorem 
+$$(\varphi,D\psi)-(D\varphi,\psi)=\int_M\mathrm{div} Z\mathrm{dvol}_g=0.$$
+\end{proof}
+
+\begin{corollary}
+ If $D$ is a Dirac operator on a Clifford module $E\to M$, then $(C^\infty(M),L^2(E),D)$ is a spectral triple over $\Co(M)$.
+\end{corollary}
+
+\subsection{The Distance Function}
+Remember that given a (piecewise) smooth curve on a Riemannian manifold $\gamma\colon[0,1]\to M$ we can define its length as $$l(\gamma)=\int_0^1\sqrt{g(\dot\gamma(t),\dot\gamma(t))}\mathrm{d}t.$$
+
+\begin{definition}
+ The Riemannian or geodesic distance on $M$ is given, for $p,q\in M$ by $$d_g(p,q)=\inf\{l(\gamma)\mid\gamma\colon[0,1]\to M,\gamma(0)=p,\gamma(1)=q\}.$$
+\end{definition}
+
+\begin{theorem}[Myers-Steenrod]The distance function $d_g$ uniquely determines the Riemannian metric $g$.
+\end{theorem}
+
+\begin{definition}
+ Given a spectral triple $\sptr$ over $A$ consider the space of states $$S(A)=\{\varphi\colon A\to\C\mid\varphi\text{ is positive linear and }\|\varphi\|=1\}$$ and define, for $\psi,\varphi\in S(A)$, the Connes distance $$d_c(\varphi,\psi)=\sup\{|\varphi(a)-\psi(a)|\mid a\in A, \|[D,a]\|\leq 1\}.$$
+ This is a (possibly unbounded) distance function.
+\end{definition}
+
+\noindent In the case $A=\Co(M)$ we have the pure states ${\mathrm{ev}_x}_{x\in M}$ where $\mathrm{ev}_x(a)=a(x)$, for $a\in\Co(M)$.
 
 
