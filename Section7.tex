@@ -1,0 +1,47 @@
+\section{Ideals of Compact Operators}
+\subsection{The Schatten Norm}
+Let $H$ be an infinite dimensional separable Hilbert space. For $T\in\K(H)$ we consider the singular values $\{s_j(T)\}_{j=0}^\infty$ given by the decreasing sequence of eigenvalues of $|T|=(T^\ast T)^{1/2}$.
+
+\begin{definition}
+ For $p\in[1,\infty)$ we define the $p$-th Schatten class $\L^p$ as 
+ $$\L^p(H)=\left\{T\in\K(H)\mid\sum_{j=0}^\infty s_j(T)^p<\infty\right\},$$
+ with the norm $$\|T\|_p=\left(\sum_{j=0}^\infty s_j(T)^p\right)^{1/p}=(\Tr|T|^p)^{1/p}.$$
+\end{definition}
+
+\noindent In particular $\L^1(H)$ is the trace class, with $\|T\|=\Tr|T|$, while $\L^2(H)$ is the class of Hilbert-Schmidt operators. 
+
+\noindent We have the following results:
+\begin{fact}
+ \begin{enumerate}
+  \item $(\L^p(H),\|\cdot\|_p)$ is a Banach space.
+  \item $\L^p(H)$ is a two sided ideal of $\K(H)$.
+  \item Given an orthonormal basis $\{e_j\}\subseteq H$ we have that $\Tr T=\sum_{j=0}^\infty\langle e_j, Te_j\rangle$ is absolutely convergent if and only if $T\in\L^1(H)$.
+  \item $\Tr\colon\L^1(H)\to\C$ is a bounded linear functional (independent of the choice of basis, by the previous fact) satisfying $\Tr(TS)=\Tr(ST)$ whenever both $TS$ and $ST$ are in $\L^1(H)$.
+  \item For $p<r$ we have $\L^p(H)\subseteq\L^r(H)$.
+  \item We have the following Hölder like inequality: for $1/p+1/q=1,T\in\L^p(H),S\in\L^q(H)$ then $TS\in\L^1(H)$ and $\Tr|TS|\leq\|T\|_p\|S\|_q$. This also holds for $p=1,q=\infty$ with $\L^\infty(H)=\B(H)$.
+ \end{enumerate}
+\end{fact}
+
+\noindent In the following we write $\sigma_k(T)$ to denote the partial sums of the singular values of $T$, that is $\sigma_k(T)=|sum_{j=0}^{k-1}s_j(T)$, for all $k\geq 1$.
+
+\begin{lemma}
+ \begin{align*}
+  \sigma_j(T)&=\inf\{\|T|_{E^\perp}\|\mid E\subseteq H, \dim E=j\}\\
+  \sigma_k(T)&=\sup\{\|T|_{E}\|_1\mid E\subseteq H,\dim E=k\}.
+ \end{align*}
+\end{lemma}
+\begin{corollary}
+ $\sigma_k(S+T)\leq\sigma_k(S)+\sigma_k(T)$
+\end{corollary}
+
+\begin{definition}
+ The \emph{Dixmier ideal} is defined as $$\L^{1+}(H)=\{T\in\K(H)\mid\|T\|_{1+}<+\infty\},$$ where $\|T\|_{1+}=\sup_{k\in\N}\frac{\sigma_k(T)}{\log k}$.
+\end{definition}
+
+\noindent By the last corollary we have that $\|\cdot\|_{1+}$ is a norm and that $\L^{1+}(H)\subseteq\K(H)$ is a linear subspace. Furthermore we have the following inclusions (proving that the second inclusion is strict is hard):
+$$\L^1(H)\subsetneq\L^{1+}(H)\subsetneq\bigcap_{\varepsilon>0}\L^{1+\varepsilon}(H).$$
+
+
+
+
+

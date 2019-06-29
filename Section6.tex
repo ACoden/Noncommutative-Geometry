@@ -89,7 +89,7 @@ $$(\varphi,D\psi)-(D\varphi,\psi)=\int_M\mathrm{div} Z\mathrm{dvol}_g=0.$$
 \end{proof}
 
 \begin{corollary}
- If $D$ is a Dirac operator on a Clifford module $E\to M$, then $(C^\infty(M),L^2(E),D)$ is a spectral triple over $\Co(M)$.
+ If $D$ is a Dirac operator on a Clifford module $E\to M$, then $(\Co^\infty(M),L^2(E),D)$ is a spectral triple over $\Co(M)$.
 \end{corollary}
 
 \subsection{The Distance Function}
@@ -107,6 +107,26 @@ Remember that given a (piecewise) smooth curve on a Riemannian manifold $\gamma\
  This is a (possibly unbounded) distance function.
 \end{definition}
 
-\noindent In the case $A=\Co(M)$ we have the pure states ${\mathrm{ev}_x}_{x\in M}$ where $\mathrm{ev}_x(a)=a(x)$, for $a\in\Co(M)$.
+\noindent In the case $A=\Co(M)$ we have the pure states $\{\mathrm{ev}_x\}_{x\in M}$ where $\mathrm{ev}_x(a)=a(x)$, for $a\in\Co(M)$.
+
+\begin{theorem}
+ Let $D$ be a Dirac operator on a Clifford module $E\to M$. For the spectral triple $(\Co^\infty(M),L^2(E),D)$ we have $d_c(\ev_p,\ev_q)=d_g(p,q)$ for all $p,q\in M$.
+\end{theorem}
+\begin{proof}
+ We have $\|[D,a]\|=\|c(da)\|=\|da\|$. \red{what is $d$? What is $a$? $a\in\Co^\infty(M)$ I suppose}
+ 
+ \noindent Consider a path $\gamma\colon[0,1]\to M$ joining $p$ and $q$. Then we have 
+ \begin{align*}
+  |a(p)-a(q)|&=|a(\gamma(1))-a(\gamma(0))|\\&=\left|\int_0^1\frac{\mathrm{d}}{\mathrm{d}t}(a(\gamma(t)))\mathrm{d}t\right|\\
+  &=\left|\int_0^1da(\dot{\gamma}(t))\mathrm{d}t\right|\\
+  &\leq\int_0^1|da(\dot{\gamma}(t))|\mathrm{d}t\\
+  &\leq \|da\|\int_0^1|\dot{\gamma}(t)|\mathrm{d}t\\
+  &=\|da\|l(\gamma)
+ \end{align*}
+hence $d_c(\ev_p,\ev_q)\leq d_g(p,q)$.
+
+\noindent To get equality let $a_p(x)=d_g(p,x)$, note that $a_p$ is not necessarily in $\Co^\infty(M)$, but it is Lipschitz: $|a_p(x)-a_p(y)|\leq d_g(p,q)$ by the triangle inequality. In particular $da_p$ is defined almost everywhere and $\|da_p\|=\mathrm{esssup}_{x\in M}|da_p(x)|\leq 1$. Now since $a_p(q)-a_p(p)=a_p(q)=d_g(p,q)$, we obtain $d_c(\ev_p,\ev_q)=d_g(p,q)$.
+\end{proof}
+
 
 
