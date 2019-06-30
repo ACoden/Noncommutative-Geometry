@@ -1,5 +1,5 @@
 \section{Ideals of Compact Operators}
-\subsection{The Schatten Norm}
+\subsection{The Schatten Norms and the Dixmier Ideal}
 Let $H$ be an infinite dimensional separable Hilbert space. For $T\in\K(H)$ we consider the singular values $\{s_j(T)\}_{j=0}^\infty$ given by the decreasing sequence of eigenvalues of $|T|=(T^\ast T)^{1/2}$.
 
 \begin{definition}
@@ -22,7 +22,7 @@ Let $H$ be an infinite dimensional separable Hilbert space. For $T\in\K(H)$ we c
  \end{enumerate}
 \end{fact}
 
-\noindent In the following we write $\sigma_k(T)$ to denote the partial sums of the singular values of $T$, that is $\sigma_k(T)=|sum_{j=0}^{k-1}s_j(T)$, for all $k\geq 1$.
+\noindent In the following we write $\sigma_k(T)$ to denote the partial sums of the singular values of $T$, that is $\sigma_k(T)=\sum_{j=0}^{k-1}s_j(T)$, for all $k\geq 1$.
 
 \begin{lemma}
  \begin{align*}
@@ -30,7 +30,7 @@ Let $H$ be an infinite dimensional separable Hilbert space. For $T\in\K(H)$ we c
   \sigma_k(T)&=\sup\{\|T|_{E}\|_1\mid E\subseteq H,\dim E=k\}.
  \end{align*}
 \end{lemma}
-\begin{corollary}
+\begin{corollary}\label{coro: Dixmier}
  $\sigma_k(S+T)\leq\sigma_k(S)+\sigma_k(T)$
 \end{corollary}
 
@@ -38,8 +38,96 @@ Let $H$ be an infinite dimensional separable Hilbert space. For $T\in\K(H)$ we c
  The \emph{Dixmier ideal} is defined as $$\L^{1+}(H)=\{T\in\K(H)\mid\|T\|_{1+}<+\infty\},$$ where $\|T\|_{1+}=\sup_{k\in\N}\frac{\sigma_k(T)}{\log k}$.
 \end{definition}
 
-\noindent By the last corollary we have that $\|\cdot\|_{1+}$ is a norm and that $\L^{1+}(H)\subseteq\K(H)$ is a linear subspace. Furthermore we have the following inclusions (proving that the second inclusion is strict is hard):
+\noindent By Corollary \eqref{coro: Dixmier} we have that $\|\cdot\|_{1+}$ is a norm and that $\L^{1+}(H)\subseteq\K(H)$ is a linear subspace. Furthermore we have the following inclusions (proving that the second inclusion is strict is hard):
 $$\L^1(H)\subsetneq\L^{1+}(H)\subsetneq\bigcap_{\varepsilon>0}\L^{1+\varepsilon}(H).$$
+
+
+\noindent We would now like to define the Dixmier trace as $$\Tr^+(T)=\lim_{k\to\infty}\frac{\sigma_k(T)}{\log k}$$ for $0<T\in\L^{1+}(H)$ but this limit does not exist in general! The solution will be to introduce a generalized limit $\omega$, strong enough to ensure that the Dixmier trace exists and to define $$\Tr_\omega(T)=\omega\left(\left(\frac{\sigma_k(T)}{\log k}\right)_{k\in\N}\right).$$ Let $\gamma_k=\sigma_k(T)/\log k$ and consider $0<S,T\in\L^{1+}(H)$. Thanks to Corollary \eqref{coro: Dixmier} we know that $\gamma_k(S+T)\leq\gamma_k(T)+\gamma_k(S)$ and we alos have
+\begin{align*}
+ \sigma_k(S)+\sigma_k(T)&=\sup_{\dim E_1=k}\Tr\left(S|_{E_1}\right)+\sup_{\dim E_2=k}\Tr\left(T|_{E_2}\right) \\
+ &\leq\sup_{E_1,E_2}(\Tr(S|_{\langle E_1,E_2\rangle})+\Tr(T|_{\langle E_1,E_2\rangle}))\\
+ &\leq\sup_{\dim E=2k}(\Tr((S+T)|_E))\\
+ &=\sigma_{2k}(S+T)
+\end{align*}
+thus $\gamma_k(T)+\gamma_k(S)\leq\frac{\log 2k}{\log k}\gamma_{2k}(S+T)$ so if we want $\Tr_\omega$ to be additive we need to ensure that $\omega((\gamma_{2k})_{k\in\N})=\omega((\gamma_k)_{k\in\N})$.
+
+\begin{definition}
+ A \emph{generalized limit} is a positive linear functional $\omega\colon\ell^\infty\to\Bbb C$ satisfying:
+ \begin{enumerate}
+  \item $\omega(1,1,1,\ldots)=1$.
+  \item If $\lim_{k\to\infty} a_k=0$, then $\omega((a_k)_{k\in\N})=0$.
+  \item $\omega(a_1,a_2,a_3,\ldots)=\omega(a_1,a_1,a_2,a_2,a_3,a_3,\ldots)$.
+ \end{enumerate}
+\end{definition}
+\red{Does taking $\omega$ to be the limit along a nonprincipal ultrafilter on $\Bbb N$ work?}
+
+\begin{lemma}
+ Generalized limits exists and they also satisfy 
+\begin{enumerate}\setcounter{enumi}{3}
+ \item $\liminf_{k\to\infty}a_k\leq\omega((a_k)_{k\in\N})\leq\limsup_{k\to\infty}a_k$
+\end{enumerate}
+\end{lemma}
+
+\begin{proposition}
+ For any generalized limit $\omega\colon\ell^\infty\to\C$ setting $\Tr_\omega(T)=\omega((\gamma_k(T))_{k\in\N})$ for $0\leq T\in\L^{1+}(H)$ defined a trace on $\L^{1+}(H)$, that is a positive linear functional $\Tr_\omega\colon\L^{1+}(H)\to\C$ satisfying $\Tr(TT^\ast)=\Tr(T^\ast T)$. Moreover $\Tr_\omega$ vanishes on $\L^1(H)$.
+\end{proposition}
+\begin{proof}
+ We begin by proving that if $T\in\L^1(H)$, $0<T$, then $\Tr_\omega(T)=0$. This is clear, because $T\in\L^1(H)$ implies that $\sigma_k(T)$ is bounded, so $\gamma_k(T)\to 0$ and by property (2) of generalized limits we have $\omega(\gamma_k))=0$.
+ 
+ \noindent Now if $T\in\L^{1+}(H)$, writing $\gamma_k$ for $\gamma_k(T)$, we have 
+ \begin{align*}
+  \omega(\gamma_{2k})&=\omega(\gamma_2,\gamma_2,\gamma_4,\gamma_4,\ldots)\\
+  &=\omega(\gamma_k)+\omega(\gamma_2-\gamma_1,0,\gamma_4-\gamma_3,\ldots)\\
+  &=\omega(\gamma_k)
+ \end{align*}
+because $\gamma_{2k}-\gamma_{2k-1}=\left(1-\frac{\log 2k}{\log 2k-1}\right)\gamma_{2k}+\frac1{\log 2k-1}s_{2k-1}(T)$.
+Thus $\Tr_\omega$ is linear on positive elements. We briefly sketch how to conclude:
+
+\noindent First of all $\Tr_\omega$ can be extended by linearity to the whole of $\L^{1+}(H)$. Then the fact that $\Tr_\omega(TT^\ast)=\Tr(T^\ast T)$ follows from the fact that $s_j(TT^\ast)=s_j(T^\ast T)$ whenever both are nonzero.
+\end{proof}
+
+\begin{definition}
+ An operator $T\in\L^{1+}(H)$ such that $\lim_{k\to\infty}\gamma_k(T)$ exists is called \emph{measurable} and we write 
+ $$\Tr^+(T)=\Tr_\omega(T)=\lim_{k\to\infty}\gamma_k(T).$$
+ Note that in this case $\Tr_\omega(T)$ does not depend on the specific $\omega$ we picked.
+\end{definition}
+
+\begin{proposition}
+ We have an Hölder inequality for the Dixmier trace as well. Let $1/p+1/q=1$, $|T|^p,|S|^q\in\L^{1+}(H)$. Then $TS\in\L^{1+}(H)$ and $$\Tr_\omega|TS|\leq(\Tr_\omega|T|^p)^{1/p}(\Tr_\omega|S|^q)^{1/q}.$$
+\end{proposition}
+
+\begin{example}
+ For example consider $M=T^n$, the $n$-dimensional torus and consider the Laplacian $\Delta_n=-\sum_{j=1}^n\partial^2_j$, whose eigenvalues (all with multiplicity $1$) are $\Z^n$. For $R>>0$ one can estimate 
+ $$\sum_{\substack{z\in\Z^n\\ \|z\|<R}}(1+\|z\|)^{-s}\sim\int_0^R(1+r^2)^{-s}\vol(S^{n-1})r^{n-1}\mathrm{d}r\sim\vol(S^{n-1})\int_0^Rr^{n-2s-1}\mathrm{d}r$$
+ 
+ \noindent Now let $N_r=\#\{z\in\Z^n\mid \|z\|\leq R\}$. Since $\log N_r\sim n\log R$, we have, for $s>n/2$
+ $$\gamma_{N_r}((1+\Delta_n)^{-s})=\frac1{\log N_r}\sum_{\|z\|\leq R}(1+\|z\|^2)^{-s}\to 0,\text{ as }R\to+\infty$$
+ 
+ \noindent For $s=n/2$ we get instead $\gamma_{N_r}((1+\Delta_n)^{-s})\sim\frac1n\vol(S^{n-1})$. Thus $(1+\Delta_n)^{-n/2}\in\L^{1+}$ and $$\Tr^+((1+\Delta_n)^{-n/2})=\frac1n\vol(S^{n-1}).$$
+\end{example}
+
+\subsection{Summability}
+\begin{definition}
+ A spectral triple $\sptr$ is called \emph{finitely summable} if there is $s_0>0$ such that $(1+D^2)^{-s_0/2}\in\L^1(H)$. Note that in this case we also have $(1+D^2)^{-s/2}\in\L^1(H)$ for all $s>s_0$ and we can define the \emph{spectral dimension} as 
+ $$\rho=\inf\{s\in[0,\infty)\mid (1+D^2)^{-s/2}\in\L^1(H)\}.$$
+\end{definition}
+
+\begin{definition}
+ A spectral triple $\sptr$ is called \emph{$p^+$-summable} if $(1+D^2)^{-p/2}\in\L^{1+}(H)$.
+\end{definition}
+
+\noindent Note that if $\sptr$ is $p^+$-summable then it is also finitely summable with spectral dimension $p$.
+
+\begin{example}
+ If $D$ is a Dirac operator on a Clifford module $E$ over an $n$-dimensional $\spinc$ manifold then $(1+D^2)^{-n/2}$ is a classical pseudodifferential operator of order $-n$.
+\end{example}
+
+\noindent In the next lecture we will see Connes trace theorem: $(1+D^2)^{-n/2}\in\L^{1+}(H)$, hence $(\Co^\infty(M),L^2(E),D)$ is $n^+$-summable.
+
+
+
+
+
 
 
 
