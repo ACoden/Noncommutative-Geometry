@@ -1,0 +1,169 @@
+\section{Connes Trace Theorem}
+\subsection{The Wodzicki Residue}
+Let $\psi^r(M)$ denote the space of pseudodifferential operators of order $r$ on a Riemannian manifold $M$. We also write $$\psi^\infty(M)=\bigcup_{r\in\R}\psi^r(M)\quad\quad\psi^{-\infty}(M)=\bigcap_{r\in\R}\psi^r(M),$$
+operators in $\psi^{-\infty}(M)$ are known as \emph{smoothing operators}.
+
+\noindent Note that, since $M$ is compact, $\psi^\infty(M)$ is an algebra. We say that a pseudodifferential operator is classical if its symbol $\sigma(P)\in\G^\infty(T^\ast M,\End(E))$ \red{I'm not sure what this notation means, shouldn't we have $\sigma(P)\colon T^\ast M\to\End(E)$?} has asymptotic expansion $$\sigma(P)(x,\xi)\sim\sum_{j=0}^\infty\sigma_{n-j}(P)(x,\xi),$$
+where each $\sigma_{n-j}$ is homogeneous in $\xi$ and of order $n-j$.
+
+\noindent We have that the symbol determines an operator up to a smoothing operator, meaning that there is a map $\Op\colon\G^\infty(T^\ast M,\End(E))\to\psi^\infty(M,E)$ such that $\Op(\sigma(P))-P\in\psi^{-\infty}(M)$.
+
+\begin{theorem}[Wodzicki]
+ Let $n=\dim M$. Given a classical pseudodifferential operator $P$ there exist a \emph{Wodzicki residue density} given locally by $$\wres_x(P)=\int_{S^{n-1}}\Tr(\sigma_{-n}(P)(x,\xi))\mathrm{d}\mu(\xi)\mathrm{d}^nx,$$
+ where $$\mathrm{d}\mu(\xi)=\sum_{j=1}^n(-1)^j\xi_j\mathrm{d}\xi_1\wedge\cdots\wedge\widehat{\mathrm{d}\xi_j}\wedge\cdots\wedge\mathrm{d}\xi_n,$$
+ where this notation means that we skip $\mathrm{d}\xi_j$. Using this we obtain the \emph{Wodzicki residue} $$\Wres(P)=\int_M\wres_x(P).$$
+ The Wodzicki residue is a trace on the classical pseudodifferential operators. If $n>1$ it is the only trace up to rescaling.
+\end{theorem}
+\begin{proof}
+ We won't prove the theorem but note that the main step is proving that $\wres_x(P)$ is independent of the choice of coordinates.
+\end{proof}
+
+\begin{proposition}
+ Let $D$ be a Dirac operator on a Clifford module $E$ of rank $k$ on a compact Riemannian $\spinc$-manifold of dimension $n$. Then $$\wres_x((1+D^2)^{-n/2})=k\vol(S^{n-1})\mathrm{dvol}_g(x).$$
+\end{proposition}
+
+\begin{proof}[Proof (sketch):] We have $$\sigma_n(1+D^2)^{-n/2}=(\sigma_2(1+D^2))^{-n/2}=(c(\xi)^2)^{-n/2}=g(\xi,\xi)^{-n/2}\cdot\Id_k.$$
+ We can apply a change of coordinates $x\leadsto y$,$\xi\leadsto\eta$ such that $\sigma_{-n}=|\eta|^{-n}$ and $\mathrm{d}^ny=\sqrt{\det g}\mathrm{d}^nx$. 
+ 
+ \noindent Then $$\wres_x(1+D^2)^{-n/2}=\Tr(\Id_k)\int_{S^{n-1}}|\eta|^{-n}\mathrm{d}^n\eta\mathrm{d}^ny=k\vol(S^{n-1})\sqrt{\det g}\mathrm{d}^nx.$$
+\end{proof}
+
+\begin{example}
+ Consider $M=\T^n$ (the $n$-torus) with the trivial $\spinc$ structure: $E=M\times\C^{2^m}$, with $n=2m$ or $n=2m+1$. Then $D_n^2=\Delta_n\Id_{2^n}$ and we get $$\Wres(1+\Delta_n)^{-n/2}=\frac1{2^n}\Wres(1+D^2)^{-n/2}=\vol(S^{n-1})(2\pi)^n.$$
+\end{example}
+
+
+\begin{theorem}[Connes Trace theorem]
+ Let $M$ be a compact $n$-dimensional Riemannian manifold, let $E\to M$ be a vector bundle and let $P\in\psi^{-n}(M,E)$ be a classical pseudodifferential operator. Then $P\in\L^{1+}(L^2(E))$, $P$ is measurable and $\Tr^+(P)=\frac{1}{n(2\pi)^n}\Wres(P)$.
+ 
+ \noindent Hence $\Tr^+((1+\Delta_n)^{-n/2})=\frac1{n(2\pi)^n}\Wres(1+\Delta_n)^{-n/2}$.
+\end{theorem}
+
+\begin{proof}[Proof (Sketch):]
+ We won't give a detailed proof, but only an outline of the steps to follow to prove the theorem.
+ \begin{enumerate}
+  \item By a partition of unity argument it suffices to prove the theorem for $M=\T^n$.
+  \item $P=\underbrace{P(1+\Delta_n)^{n/2}}_{\text{zeroth order bounded}}\underbrace{(1+\Delta_n)^{-n/2}}_{\in\L^{1+}(L^2(E))}\in\L^{1+}(L^2(E))$
+  \item Since $\Tr^+(1+\Delta_n)^{-s/2}=0$ for all $s>n$ we have $\Tr(Q)=0$ for every $Q$ of order $-s<-n$. In particular this holds for $Q=\Op(\sigma(P)-\sigma_{-n}(P))$. Hence $\Tr^+(P)$ depends only on $\sigma_{-n}(P)$.
+  \item The map $\sigma_{-n}(P)\to\Tr^+(P)$ determines a measure on $\Co^\infty(S^\ast M)$, where $S^\ast M=\{\xi\in T^\ast M\mid |\xi|=1\}$ is the so called cosphere bundle. Since $\Tr^+$ is invariant under unitary transformations this measure must be invariant under rotations, hence it must be proportional to the volume form.
+  \item The constant of proportionality can be worked by computed an example, like we did above for $P=(1+\Delta_n)^{-n/2}$.
+ \end{enumerate}
+\end{proof}
+
+\subsection{Hochschild (Co)Homology}
+Given an algebra $A$ (in particular we will look at $A=\Co^\infty(M)$) we can form a chain complex of algebras $(\Co_\bullet(A),b)$ where $\Co_k(A)=A^{\otimes(k+1)}$ and the boundary map $b\colon \Co_{k+1}(A)\to\Co_k(A)$ is given by 
+$$b(a_0\otimes\cdots\otimes a_k)=\sum_{j=0}^{k-1}(-1)^ja_0\otimes\cdots\otimes a_ja_{j+1}\otimes\cdots\otimes a_k+(-1)^k a_ka_0\otimes\cdots\otimes a_{k-1},$$
+and $b=0$ on $\Co_0(A)$. We actually have $b^2=0$, but checking this is a messy computation that we won't carry out explicitely.
+
+\begin{definition}
+ The \emph{Hochschild Homology} $HH_\bullet(A)$ is the homology of the chain complex $(\Co_\bullet(A),b)$, explicitely $HH_k(A)=Z_k(A)/B_k(A)$ where 
+ \begin{align*}
+  Z_k(A)&=\ker(b\colon\Co_k(A)\to\Co_{k-1}(A))\\
+  B_k(A)&=\mathrm{Im}(b\colon\Co_{k+1}(A)\to\Co_k(A))
+ \end{align*}
+\end{definition}
+
+\begin{example}
+ If $A\simeq\C$ then $\Co_n(\C)\simeq\C$ and $$b=\sum_{j=0}^k(-1)^j=\begin{cases} 1 & k \text{ is even} \\ 0 & k\text{ is odd}\end{cases}.$$
+ 
+ \noindent So we obtain \begin{tikzcd} \C \arrow[r,"0"] & \C \arrow[r,"1"] & \C \arrow[r,"0"] & \C\arrow[r] & 0\end{tikzcd} and we get $HH_0(\C)=\C$ and $HH_k(\C)=0$ for $k>0$.
+\end{example}
+
+\begin{lemma}
+ For every algebra $A$ we have $HH_0(A)=A/[A,A]$, so in particular $HH_0(A)\simeq A$ if $A$ is commutative.
+\end{lemma}
+
+\begin{example}
+ If $A=\Co^\infty(M)$ then $\Co_k(A)\simeq\Co^\infty(M)^k$ and 
+ $$(bF)(x_0,\ldots,x_{k-1})=\sum_{j=0}^{k-1}(-1)^j F(x_0,\ldots,x_j,x_{j+1},\ldots,x_{k-1})+(-1)^kF(x_0,\ldots,x_{k-1},x_0).$$
+ 
+ \noindent There is a natural map $\Omega^k(M)\to HH_k(\Co^\infty(M))$ given locally by 
+ $$f\mathrm{d}x^1\wedge\cdots\wedge\mathrm{d}x^k\mapsto\frac1{k!}\sum_{\pi\in S_k}(-1)^{\mathrm{sign}(\pi)}f\otimes x^{\pi(1)}\otimes\cdots\otimes x^{\pi(k)}.$$
+ 
+ \noindent We have in particular $HH_0(\Co^\infty(M))\simeq\Co^\infty(M)$.
+\end{example}
+
+\noindent Connes proved that in fact $HH_\bullet(\Co^\infty(M))\simeq\Omega^\bullet(M)$, so that de Rham cohomology can be recovered from Hochschild homology. More precisely Connes proved a dual version we will present shortly, after defining Hochschild cohomology.
+
+\begin{definition}
+ Let $\Co^k(A)$ denote the \emph{Hochschild $k$-cochains}, that is linear forms on $\Co_k(A)$, or linear functionals on $A^{\otimes(k+1)}$. The coboundary operator $b\colon\Co^k(A)\to\Co^{k+1}(A)$ is given by 
+ $$b\varphi(a_0,\ldots,a_{k+1})=\sum_{j=0}^k(-1)^j\varphi(a_0,\ldots,a_ja_{j+1},\ldots a_{k+1})+(-1)^k\varphi(a_{k-1},a_0,\ldots,a_k).$$
+ 
+ \noindent As usual Hochschild cohomology is defined as $HH^\bullet(A)=H^\bullet(\Co^k(A))$.
+\end{definition}
+
+\noindent Note that an Hochschild $0$-cocycle $\tau$ is a trace on $A$, since $\tau(ca-ac)=b\tau(a,c)=0$.
+
+\begin{definition}
+ For a compact manifold $M$ let $D_k(M)=\{\text{continuous linear functionals }\Omega^k(M)\to\C\}$ be the space of $k$-De Rham currents on $M$. For $C\in D_k(M)$ and $\alpha\in\Omega^k(M)$ we have a pairing given by $\int_C\alpha\in\C$. The boundary of $C$ is the $k-1$ current $\partial C$ given by $$\int_{\partial C}\beta=\int_C\mathrm{d}\beta,\quad\beta\in\Omega^{k-1}(M).$$
+\end{definition}
+
+\begin{theorem}[Connes]
+ $HH^\bullet(\Co^\infty(M))\simeq D_\bullet(M)$.
+\end{theorem}
+
+\subsection{Regularity and Connes Characters Formula}
+Given a spectral triple $\sptr$ we write $\delta(T)=[|D|,T]$, for $T\in\dom\delta$, where 
+$$\dom\delta=\{T\in\B(H)\mid T\dom D\to\dom D\text{ and } [|D|,T]\text{ is bounded on }\dom D\}.$$
+
+\begin{definition}
+ A spectral triple $\sptr$ is called \emph{regular} if for each $a\in A$ and each $k\in\N$, both $a$ and $[D,a]$ belong to $\dom\delta^k$.
+\end{definition}
+
+\begin{definition}
+ If $A$ is a $C^\ast$-algebra then a $\ast$-subalgebra $\A\subseteq A$ is called a \emph{pre-$C^\ast$-algebra} if
+ \begin{enumerate}
+  \item $\A$ is complete with respect to some locally convex topology finer than the norm topology of $A$.
+  \item If $a\in\A$ is invertible in $A$, then $a^{-1}\in\A$.
+ \end{enumerate}
+\end{definition}
+
+\begin{example}
+ The standard example, which we have encountered multipled times already, is $\Co^\infty(M)\subseteq\Co(M)$.
+\end{example}
+
+\noindent Given a spectral triple $\sptr$ we write $\G$ for the $\Z_2$-grading if $\sptr$ is even, and $\G=1$ if it is odd.
+
+\begin{lemma}
+ If $\sptr$ is $n^+$-summable and $\omega$ is a generalized limit, then 
+ \begin{enumerate}
+  \item For all $a\in\A$ and $T\in\B(H)$ we have $\Tr_\omega([T,a]|D|^{-n})=0$.
+  \item $\varphi^\omega_D(a_0,\ldots,a_n)=\Tr_omega(\G a_0[D,a_1]\ldots[D,a_n]|D|^{-n})$ defines an Hochschild $n$-cocycle
+ \end{enumerate}
+ 
+ \noindent Note that the above definition doesn't really work if $D$ is not invertible, if $D$ isn't invertible we should either remove the finite dimensional $\ker D$ from $H$, or use $1+D^2$ instead.
+\end{lemma}
+
+\begin{proof}[Proof (Sketch):]
+ By Hölder's inequality we have $$|\Tr_\omega([T,a]|D|^{-n})=|\Tr_\omega(T[|D|^{-n},a])\leq\|T\|\cdot\Tr|[|D|^{-n},a]|=0$$
+ (the last equality is very tedious to check). Furthermore we have
+ $$b\varphi^\omega_D(a_0,\ldots,a_{n+1})=(-1)^n\Tr_\omega([\G a_0[D,a_1]\ldots[D.a_n],a_{n+1}]|D|^{-n})=0,\quad\text{ by (1)}.$$
+\end{proof}
+
+\begin{lemma}
+ Let $F$ denote $D|D|^{-1}$. If $\sptr$ is $p$-summable then $[F,a]\in\L^p(H)$ for all $a\in A$.
+\end{lemma}
+
+\begin{corollary}
+ If $\sptr$ is $n^+$ summable then $[F,a]\in\L^{n+1}(H)$ and $[F,a_0]\ldots[F,a_n]\in\L^{1}(H)$.\red{who are the $a_i$ here?}
+\end{corollary}
+
+\begin{theorem}[Connes character formula]
+Let $\sptr$ be a recular and $n^+$ summable spectral triple, $\omega$ a generalised limit. If $c=\sum_j a_{0_j}\otimes\ldots\otimes a_{n_j}$ \red{the indices confuse me here} is a Hochschild $n$-cycle, then 
+$$\langle\varphi^\omega_D,c\rangle=\sum_j\Tr(\G F[F,a_{0_j}]\ldots[F,a_{n_j}]),$$
+in particular $\langle\varphi^\omega_D,c\rangle$ is independent of $\omega$.
+ 
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
