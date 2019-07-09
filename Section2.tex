@@ -135,7 +135,7 @@ The following are equivalent:
  \item $(1)\implies(2):$ If $\E$ is projective any exact sequence $$\begin{tikzcd}0\arrow[r] & \mathcal G'\arrow[r] & \mathcal G \arrow[r] & \E\arrow[r] & 0 \end{tikzcd}$$ splits since $\Id:\E\to\E$ lifts to a splitting $E\to\mathcal G$. Pick a generating set $\{x_j\}_{j\in J}\subseteq\E$ and let $\F$ be the free module with generators $\{\delta_j\}_{j\in J}$. Define $\eta\colon\F\to\E$ by $\delta_j\to x_j$. Then $$\begin{tikzcd}0\arrow[r] & \mathcal \ker\eta\arrow[r] & \mathcal \F \arrow[r] & \E\arrow[r] & 0 \end{tikzcd}$$ is exact, hence it splits and therefore $\E\oplus\ker\eta\simeq\F$.
  \item $(2)\implies(1):$ If $\E\oplus\E'$ is free then it is projective and so is $\E$, by Lemma \eqref{lemma: free}.
  \item $(2)\implies(3):$ Given a split exact sequence $$\begin{tikzcd}0\arrow[r] & \mathcal \E\arrow[r] & \mathcal \F \arrow[r] & \E'\arrow[r] & 0 \end{tikzcd}$$ with $\F\simeq\E\oplus\E'$ define $p\in\End_A(\F)$ by $\F\to\E'\to\F$, where the second map is the splitting. Then $\E'\simeq p(\F)$ and $p=p^2$.
- \item $(3)\implies(2):$ If $\E=p(\F)$ with $p=p^2$ then $\F\simeq\E\otimes(1-p)\F$.
+ \item $(3)\implies(2):$ If $\E=p(\F)$ with $p=p^2$ then $\F\simeq\E\oplus(1-p)\F$.
  \end{itemize}
 \end{proof}
 
