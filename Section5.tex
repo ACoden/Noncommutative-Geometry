@@ -65,7 +65,7 @@ Let $(M,g)$ be a compact smooth Riemannian manifold of dimension $n$.
 \end{definition}
 
 \begin{definition}
- A \emph{1st order differential operator} $D$ on $E$ is a linear map $L^\infty(E)\to L^\infty(E)$ which in local coordinates has the form $$D=\sum_{j=1}^na_j\partial_{x_j}+b,\text{ where }a_j,b\in\G^\infty(\End(E)),$$
+ A \emph{1st order differential operator} $D$ on $E$ is a linear map $\G^\infty(E)\to \G^\infty(E)$ which in local coordinates has the form $$D=\sum_{j=1}^na_j\partial_{x_j}+b,\text{ where }a_j,b\in\G^\infty(\End(E)),$$
  where $\End(E)$ denotes the vector bundle with fibers $(\End(E))_x=\End (E_x)$.
 \end{definition}
 
@@ -76,10 +76,10 @@ Let $(M,g)$ be a compact smooth Riemannian manifold of dimension $n$.
 \end{definition}
 
 \begin{remark}
- Since $L^2(E)$ is the completion of $L^\infty(E)$ we can think about a 1st order differential operator $D$ as a densely defined operator on $L^2(E)$ to obtain:
+ Since $L^2(E)$ is the completion of $\G^\infty(E)$ we can think about a 1st order differential operator $D$ as a densely defined operator on $L^2(E)$ to obtain:
  \begin{enumerate}
   \item Since $D^t\subseteq D^\ast$,$D^\ast$ is densely defined and $D$ is closable.
-  \item If $D$ is formally self-adjoint then $D$ is symmetric on $\dom (D)=L^\infty(E)$.
+  \item If $D$ is formally self-adjoint then $D$ is symmetric on $\dom (D)=\G^\infty(E)$.
  \end{enumerate}
 \end{remark}
 In fact, since $M$ is compact and $D$ is first order we can say more:
@@ -116,7 +116,7 @@ In fact, since $M$ is compact and $D$ is first order we can say more:
 \end{proof}
 
 \begin{remark}
- We recall the spectral theorem for compact operators. Let $T$ be a compact normal operator on an Hilbert space $H$ (where normal means that $TT^\ast=T^\ast T$). Then $$H=H_0\oplus\bigoplus{n\in\N}H_{\mu_n},$$
+ We recall the spectral theorem for compact operators. Let $T$ be a compact normal operator on an Hilbert space $H$ (where normal means that $TT^\ast=T^\ast T$). Then $$H=H_0\oplus\bigoplus_{n\in\N}H_{\mu_n},$$
  where $H_0=\ker T$ and $H_{\mu_n}$ ($\mu_n\neq 0$) is the finite dimensional eigenspace of $T$ with eigenvalue $\mu_n$. Moreover $|\mu_n|\to 0$ as $n\to\infty$ 
 \end{remark}
 \begin{corollary}
